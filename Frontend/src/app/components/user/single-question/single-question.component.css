@@ -1,0 +1,86 @@
+*{
+    margin: 0px;
+    padding: 0px;
+}
+.searchdiv {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    background-color: rgba(110, 110, 238, 255);
+    color: white;
+    padding-bottom:20px;
+
+}
+input {
+    width: 600px;
+}
+
+.brand {
+    margin-top: 50px;
+}
+.question{
+    background-color: rgba(221, 221, 221, 255);
+    border-radius: 1rem;
+    padding: 1rem;
+    width: 70%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+}
+
+.votes {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.votesIcons {
+    width: 50px;
+}
+
+.answersDiv {
+    background-color: rgba(221, 221, 221, 255);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 50px;
+    padding-bottom: 100px;
+}
+
+.answer {
+    background-color: white;
+    border-radius: 1rem;
+    padding: 1rem;
+    width: 70%;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+
+.answerContent {
+    width: 800px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+}
+button {
+    color: white;
+    background-color: rgba(110, 110, 238, 255);
+    padding: 0.5rem;
+    border: transparent;
+    border-radius: 0.5rem;
+    text-align: center;
+}
+
+button:hover {
+    background-color: black;
+
+}

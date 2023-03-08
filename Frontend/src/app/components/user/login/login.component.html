@@ -1,0 +1,60 @@
+<div class="maincontainer">
+    <div class="content">
+        <div class="imgDiv">
+            <img id="image" src="../../../../assets/images/tingey-injury-law-firm-LJhXYHxPfEY-unsplash.jpg">
+        </div>
+
+        <div class="formDiv">
+            <div class="top">
+                <h2>THE ANSWER HUB</h2>
+                <h5>LOGIN BELOW:</h5>
+
+            </div>
+
+            <form class="form" [formGroup]="form" (ngSubmit)="submitData()">
+
+                <div class="form-group">
+                    <label for="email">E-mail</label>
+                    <input type="email" name="email" required formControlName="email" placeholder="Email">
+                    <span class="error" *ngIf="!form.get('email')?.valid && form.get('email')?.touched">
+                        <span class="error" *ngIf="form.get('email')!.errors!['required']">Please Input an
+                            Email</span>
+                        <span class="error" *ngIf="form.get('email')!.errors!['email']">Please Enter a Valid
+                            Email</span>
+                    </span>
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" name="password" placeholder="Password" formControlName="password" required
+                        pattern='^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%?&])[A-Za-z\d$@$!%?&]{8,}$' />
+                    <span class="error" *ngIf="!form.get('password')?.valid && form.get('password')?.touched">Please
+                        Enter a Valid Password</span>
+                </div>
+
+                <div class="form-group">
+                    <p id="forgotpassword"><a href="forgotpassword.html">Forgot Password?</a></p>
+                </div>
+
+                <div class="form-group">
+                    <button type="submit" class="login" [disabled]="!form.valid"
+                        [ngClass]="{invalid:!form.valid, valid:form.valid}">LOGIN</button>
+                </div>
+                <br>
+
+
+
+                <div class="alternative">
+                    <p>OR</p>
+                    <br>
+                    <p>Need an Account? <a routerLink="/register">REGISTER</a></p>
+
+                </div>
+
+
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- <p>login works</p> -->
