@@ -42,10 +42,16 @@ button:hover {
 .brand {
     margin-top: 50px;
 }
-.searchIcon{
+
+.searchInput {
+    padding: 20px;
+}
+
+.searchIcon {
     width: 30px;
     margin-left: -40px;
 }
+
 .ontop {
     display: flex;
     justify-content: space-around;
@@ -121,6 +127,10 @@ h3 {
     width: 50px;
 }
 
+.votesIcons:hover {
+    opacity: 50%;
+}
+
 .questionContent {
     width: 800px;
     display: flex;
@@ -128,6 +138,15 @@ h3 {
     justify-content: center;
     align-items: center;
     gap: 2rem;
+}
+
+.description {
+    text-align: center;
+}
+
+h5:hover {
+    color: rgba(110, 110, 238, 255);
+
 }
 
 .viewQuestion {

@@ -1,1 +1,39 @@
-<p>ask-question works!</p>
+<app-header></app-header>
+
+<div class="maincontainer"> 
+    <form [formGroup]="form" (ngSubmit)="submitData()">
+        <h4>ASK YOUR QUESTION BELOW:</h4>
+        <div class="title">
+            <label>Title:</label>
+            <input type="text" name="title" required formControlName="title" >
+            <span class="error" *ngIf="!form.get('title')?.valid && form.get('title')?.touched">Please
+                Enter a Valid Question Title</span>
+        </div>
+        <div class="description">
+            <label>Description:</label>
+            <textarea type="text" name="description" required formControlName="description"></textarea>
+            <span class="error" *ngIf="!form.get('description')?.valid && form.get('description')?.touched">Please
+                Enter a Valid Question Description</span>
+        </div>
+        <div class="tags">
+            <label>Add Tags</label>
+            <select>
+                <option value="default">Select a Tag that best describes your question</option>
+                <option value="option1">HTML</option>
+                <option value="option2">CSS</option>
+                <option value="option3">ANGULAR</option>
+                <option value="option4">NODEJS</option>
+                <option value="option5">SQL</option>
+                <option value="option5">GIT</option>
+            </select>
+            <span class="error" *ngIf="!form.get('tags')?.valid && form.get('tags')?.touched">Please
+                Choose a Valid Tag Option</span>
+        </div>
+        <div>
+            <button class="postQuestion">POST QUESTION</button>
+        </div>
+    </form>
+
+</div>
+
+<app-footer></app-footer>

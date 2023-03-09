@@ -2,7 +2,8 @@
     background-color: rgba(110, 110, 238, 255);
     display: flex;
     justify-content: space-around;
-    gap: 20px
+    gap: 20px;
+    color:white
 }
 img{
     width: 30px;
@@ -23,10 +24,11 @@ img{
     
 }
 a{
-    color: black;
-}
-a:hover{
     color: white;
+}
+
+a:hover{
+    color: black;
 }
 .copyright{
     background-color: black;

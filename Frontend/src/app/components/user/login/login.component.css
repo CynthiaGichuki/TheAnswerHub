@@ -57,8 +57,9 @@ span {
 a {
     color: black;
 }
-a:hover{
-    color:rgba(110, 110, 238, 255) ;
+
+a:hover {
+    color: rgba(110, 110, 238, 255);
 }
 
 h2 {
@@ -102,14 +103,15 @@ button {
 
 }
 
-input{
+input {
     padding: 10px;
     background-color: rgba(110, 110, 238, 255);
     border-radius: 5px;
     border-color: transparent;
     outline: none;
 }
-input::placeholder{
+
+input::placeholder {
     color: white;
 }
 

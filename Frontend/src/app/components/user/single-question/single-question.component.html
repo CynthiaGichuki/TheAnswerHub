@@ -1,17 +1,21 @@
 <app-header></app-header>
-<div class="searchdiv">
+<div class="brandDiv">
     <div class="brand">
         <h1>THE ANSWER HUB</h1>
     </div>
     <p>Where Your Curiosity Meets Solutions</p>
-    <input placeholder="Search Possible Solutions">
-    <!-- <img class="icons" src="../../../../assets/icons/search.png"> -->
+    <div class="searchdiv">
+        <input placeholder="Search Answers Here">
+        <img class="searchIcon" src="../../../../assets/icons/search.png">
+    </div>
+
 </div>
+<h4>QUESTION</h4>
 <div class="question">
     <div class="votes">
-        <img class="votesIcons" src="../../../../assets/icons/thumb-up.png">
+        <img class="votesIcons" src="../../../../assets/icons/thumb-up.png" title="Upvote this question">
         <p>50</p>
-        <img class="votesIcons" src="../../../../assets/icons/thumb-up.png">
+        <img class="votesIcons" src="../../../../assets/icons/thumb-down.png" title="Downvote this question">
     </div>
     <div class="questionContent">
         <div class="title">
@@ -26,11 +30,12 @@
     </div>
 </div>
 <div class="answersDiv">
+    <h4>ANSWERS</h4>
     <div class="answer">
         <div class="votes">
-            <img class="votesIcons" src="../../../../assets/icons/thumb-up.png">
+            <img class="votesIcons" src="../../../../assets/icons/thumb-up.png" title="Upvote this answer">
             <p>50</p>
-            <img class="votesIcons" src="../../../../assets/icons/thumb-up.png">
+            <img class="votesIcons" src="../../../../assets/icons/thumb-down.png" title="Downvote this answer">
         </div>
         <div class="answerContent">
             <div class="description">
@@ -40,17 +45,22 @@
                 commit them again).
 
             </div>
-            <div class="viewQuestion">
-                <button routerLink="/question">VIEW COMMENTS</button>
+            <div class="viewComment">
+                <button routerLink="/question" (click)="viewComment()">VIEW COMMENTS</button>
                 <button routerLink="/question">COMMENT</button>
+            </div>
+            <div class="comments">
+                <p>Comment 1</p>
+                <p>Comment 2</p>
+
             </div>
         </div>
     </div>
     <div class="answer">
         <div class="votes">
-            <img class="votesIcons" src="../../../../assets/icons/thumb-up.png">
+            <img class="votesIcons" src="../../../../assets/icons/thumb-up.png" title="Upvote this answer">
             <p>50</p>
-            <img class="votesIcons" src="../../../../assets/icons/thumb-up.png">
+            <img class="votesIcons" src="../../../../assets/icons/thumb-down.png" title="Downvote this answer">
         </div>
         <div class="answerContent">
             <div class="description">
@@ -60,16 +70,22 @@
                 commit them again).
 
             </div>
-            <div class="viewQuestion">
+            <div class="viewComment">
                 <button routerLink="/question">VIEW COMMENTS</button>
                 <button routerLink="/question">COMMENT</button>
             </div>
+            <div class="comments">
+                <p>Comment 1</p>
+                <p>Comment 2</p>
+
+            </div>
         </div>
     </div>
-</div>
-<div class="submitAnswers">
-    <h5>Submit Your Answer</h5>
-    <textarea></textarea>
-    <button class="submitAnswerBtn">SUBMIT ANSWER</button>
 
+    <div class="submitAnswers">
+        <h5>Submit Your Own Answer</h5>
+        <textarea></textarea>
+        <button class="submitAnswerBtn">SUBMIT ANSWER</button>
+
+    </div>
 </div>

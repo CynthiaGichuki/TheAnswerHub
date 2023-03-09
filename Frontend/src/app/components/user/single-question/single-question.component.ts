@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HeaderComponent } from '../header/header.component';
 
@@ -9,6 +9,17 @@ import { HeaderComponent } from '../header/header.component';
   templateUrl: './single-question.component.html',
   styleUrls: ['./single-question.component.css']
 })
-export class SingleQuestionComponent {
+export class SingleQuestionComponent implements OnInit{
+  constructor(){
+
+  }
+  ngOnInit(): void {
+    
+
+    }
+    viewComment(){
+      
+    }
+  
 
 }

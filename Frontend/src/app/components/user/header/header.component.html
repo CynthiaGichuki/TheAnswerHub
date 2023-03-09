@@ -4,13 +4,13 @@
     </div>
     <div class="links">
         <a routerLink="">HOME</a>
-        <a routerLink="/login">LOGIN</a>
-        <a routerLink="/register">REGISTER</a>
+        <a *ngIf="!auth.isLoggedIn" routerLink="/login">LOGIN</a>
+        <a *ngIf="!auth.isLoggedIn" routerLink="/register">REGISTER</a>
     </div>
 
     <div class="buttons">
-        <button routerLink="/askquestion">ASK A QUESTION</button>
-        <button routerLink="/login">SIGN IN</button>
+        <button *ngIf="auth.isLoggedIn" routerLink="/askquestion">ASK A QUESTION</button>
+        <button *ngIf="!auth.isLoggedIn" routerLink="/login">SIGN IN</button>
     </div>
 
 </div>
