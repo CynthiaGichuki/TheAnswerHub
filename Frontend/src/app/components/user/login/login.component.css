@@ -5,13 +5,11 @@
 }
 
 .maincontainer {
-    /* width: 98vw;*/
     height: 100vh;
     background-color: rgba(221, 221, 221, 255);
     display: flex;
     justify-content: center;
     align-items: center;
-
 }
 
 .content {
@@ -22,7 +20,6 @@
     justify-content: center;
     align-items: center;
     flex-wrap: wrap;
-
 }
 
 .imgDiv {
@@ -33,7 +30,6 @@
 #image {
     width: 100%;
     height: 100%;
-    /* border-radius: 10px; */
 }
 
 .formDiv {
@@ -47,12 +43,9 @@
     gap: 20px;
 }
 
-
-
 span {
     color: red;
 }
-
 
 a {
     color: black;
@@ -77,9 +70,7 @@ h2 {
     flex-direction: column;
     justify-content: center;
     gap: 10px;
-    /* padding: 40px; */
     margin-bottom: 10px;
-
 }
 
 #forgotpassword {
@@ -100,7 +91,6 @@ button {
 
 .alternative {
     text-align: center;
-
 }
 
 input {
@@ -125,4 +115,41 @@ input.ng-invalid.ng-touched {
 
 .valid {
     background-color: cadetblue;
+}
+
+/* Media Queries for Tablets */
+
+@media only screen and (max-width: 768px) {
+    .content {
+        flex-direction: column;
+        height: auto;
+    }
+
+    .imgDiv {
+        width: 100%;
+        height: 50%;
+    }
+
+    .formDiv {
+        width: 100%;
+        height: 50%;
+    }
+}
+
+/* Media Queries for Phones */
+
+@media only screen and (max-width: 480px) {
+    .content {
+        height: auto;
+    }
+
+    .imgDiv {
+        width: 100%;
+        height: 30%;
+    }
+
+    .formDiv {
+        width: 100%;
+        height: 70%;
+    }
 }

@@ -5,7 +5,6 @@
 }
 
 .maincontainer {
-    /* width: 98vw;*/
     height: 100vh;
     background-color: rgba(221, 221, 221, 255);
     display: flex;
@@ -32,7 +31,6 @@
 #image {
     width: 100%;
     height: 100%;
-    /* border-radius: 10px; */
 }
 
 .formDiv {
@@ -43,7 +41,6 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    /* height: 460px; */
 }
 
 h2 {
@@ -59,7 +56,6 @@ h2 {
 span {
     color: red;
 }
-
 
 a {
     color: black;
@@ -84,9 +80,7 @@ h2 {
     flex-direction: column;
     justify-content: center;
     gap: 10px;
-    /* padding: 40px; */
     margin-bottom: 10px;
-
 }
 
 .register {
@@ -103,7 +97,6 @@ button {
 
 .alternative {
     text-align: center;
-
 }
 
 input {
@@ -128,4 +121,40 @@ input.ng-invalid.ng-touched {
 
 .valid {
     background-color: cadetblue;
+}
+
+/* Responsive styles */
+
+@media screen and (max-width: 768px) {
+    .content {
+        width: 90vw;
+        height: auto;
+        flex-direction: column;
+    }
+
+    .imgDiv {
+        width: 100%;
+        height: 50%;
+    }
+
+    .formDiv {
+        width: 100%;
+        height: 50%;
+    }
+
+    /* #image {
+        display: none;
+    } */
+}
+
+@media screen and (max-width: 480px) {
+    .inputs {
+        font-size: 14px;
+    }
+
+    .register {
+        font-size: 16px;
+    }
+
+
 }
