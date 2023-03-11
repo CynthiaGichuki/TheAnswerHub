@@ -158,3 +158,179 @@ h5:hover {
 .answer {
     display: flex;
 }
+
+/* Mobile Styles */
+@media (max-width: 767px)  {
+    input {
+        width: 100%;
+        height: 40px;
+        margin-bottom: 1rem;
+    }
+
+    .brandDiv {
+        margin-top: 2rem;
+    }
+
+    .searchInput {
+        padding: 10px;
+        width: 400px;
+    }
+
+    .searchIcon {
+        width: 20px;
+        margin-left: -30px;
+    }
+
+    .ontop {
+        justify-content: space-around;
+        margin-top: 3rem;
+        gap: 20px;
+    }
+
+    .ask {
+        width: 80%;
+        margin-bottom: 1rem;
+    }
+
+    .icons {
+        width: 30%;
+        margin-bottom: 1rem;
+    }
+
+    .topask {
+        width: 100%;
+        margin-bottom: 1rem;
+    }
+
+    .popularquestionsdivtext {
+        margin-top: 10rem;
+    }
+
+    .question {
+        width: 100%;
+        padding: 1rem;
+        flex-direction: row;
+        align-items: center;
+        gap: 1rem;
+    }
+
+    .votes {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    .votesIcons {
+        width: 30px;
+    }
+
+    .questionContent {
+        width: 100%;
+        align-items: center;
+        gap: 1rem;
+    }
+
+    .viewQuestion {
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        gap: 2rem;
+    }
+
+    .answer {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+    }
+}
+
+/* Tablet Styles */
+@media (min-width: 768px) and (max-width: 991px) {
+    input {
+        width: 100%;
+        height: 40px;
+        margin-bottom: 1rem;
+    }
+
+    .brandDiv {
+        margin-top: 2rem;
+    }
+
+    .searchInput {
+        padding: 10px;
+        width: 400px;
+    }
+
+    .searchIcon {
+        width: 20px;
+        margin-left: -30px;
+    }
+
+    .ontop {
+        justify-content: space-around;
+        margin-top: 3rem;
+        gap: 20px;
+    }
+
+    .ask {
+        width: 80%;
+        margin-bottom: 1rem;
+    }
+
+    .icons {
+        width: 30%;
+        margin-bottom: 1rem;
+    }
+
+
+    .topask {
+        width: 300px;
+        margin-bottom: 1rem;
+    }
+
+    .popularquestionsdivtext {
+        margin-top: 10rem;
+    }
+
+    .question {
+        width: 100%;
+        padding: 1rem;
+        flex-direction: row;
+        /* justify-content: center; */
+        align-items: center;
+        gap: 1rem;
+    }
+
+    .votes {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    .votesIcons {
+        width: 30px;
+    }
+
+    .questionContent {
+        width: 100%;
+        align-items: center;
+        gap: 1rem;
+    }
+
+    .viewQuestion {
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        gap: 2rem;
+    }
+
+    .answer {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+    }
+}
+
+/* Desktop Styles */
