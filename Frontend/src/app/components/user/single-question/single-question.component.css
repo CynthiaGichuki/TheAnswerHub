@@ -4,7 +4,7 @@
 }
 
 input {
-    width: 600px;
+    width: 100%;
     height: 40px;
 }
 
@@ -63,9 +63,11 @@ input {
 .votesIcons {
     width: 50px;
 }
-.votesIcons:hover{
+
+.votesIcons:hover {
     opacity: 50%;
 }
+
 h4 {
     text-align: center;
     background-color: rgba(221, 221, 221, 255);
@@ -129,7 +131,6 @@ button:hover {
     gap: 10px;
 }
 
-
 textarea {
     height: 250px;
 }
@@ -137,3 +138,76 @@ textarea {
 .submitAnswerBtn {
     width: 20%;
 }
+
+/* Medium devices (tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+    input {
+      width: 100%;
+    }
+    .brandDiv {
+      padding-top: 60px;
+      padding-bottom: 80px;
+    }
+    .question {
+      padding-bottom: 60px;
+    }
+    .answersDiv {
+      gap: 70px;
+      padding-bottom: 120px;
+    }
+    .answer {
+      width: 90%;
+    }
+    .submitAnswers {
+      width: 90%;
+    }
+  }
+  
+  /* Large devices (laptops/desktops, 992px and up) */
+  @media only screen and (min-width: 992px) {
+    input {
+      width: 100%;
+    }
+    .brandDiv {
+      padding-top: 80px;
+      padding-bottom: 100px;
+    }
+    .question {
+      padding-bottom: 70px;
+    }
+    .answersDiv {
+      gap: 80px;
+      padding-bottom: 140px;
+    }
+    .answer {
+      width: 80%;
+    }
+    .submitAnswers {
+      width: 80%;
+    }
+  }
+  
+  /* Extra large devices (large laptops and desktops, 1200px and up) */
+  @media only screen and (min-width: 1200px) {
+    input {
+      width: 100%;
+    }
+    .brandDiv {
+      padding-top: 100px;
+      padding-bottom: 120px;
+    }
+    .question {
+      padding-bottom: 80px;
+    }
+    .answersDiv {
+      gap: 90px;
+      padding-bottom: 160px;
+    }
+    .answer {
+      width: 70%;
+    }
+    .submitAnswers {
+      width: 70%;
+    }
+  }
+  

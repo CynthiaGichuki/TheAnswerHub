@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { HeaderComponent } from './components/user/header/header.component';
 import { ReactiveFormsModule } from '@angular/forms'
 import { HttpClientModule } from '@angular/common/http';
+import { StoreModule } from '@ngrx/store';
 
 @NgModule({
     declarations: [
@@ -19,6 +20,7 @@ import { HttpClientModule } from '@angular/common/http';
         ReactiveFormsModule,
         HttpClientModule,
         HeaderComponent,
+        StoreModule.forRoot({}, {}),
      
     ]
 })
