@@ -1,0 +1,5 @@
+<div *ngFor="let question of questions$ | async">
+  <h2>{{ question.title }}</h2>
+  <p>{{ question.description }}</p>
+  <p>Tags: {{ question.tags }}</p>
+</div>

@@ -1,20 +1,25 @@
-import { createSelector } from '@ngrx/store';
-import { AppState } from '../app.state';
-import { QuestionState } from '../Reducers/question.reducer';
+import { createFeatureSelector, createSelector } from '@ngrx/store';
+import { QuestionState } from '../../interfaces/interfaces';
 
-export const selectQuestionState = (state: AppState) => state.question;
 
-export const selectQuestions = createSelector(
+export const selectQuestionState =
+  createFeatureSelector<QuestionState>('question');
+
+export const selectAllQuestions = createSelector(
   selectQuestionState,
-  (state: QuestionState) => state.questions
+  (state) => state.questions
 );
 
-export const selectQuestionsLoading = createSelector(
+export const selectQuestionLoading = createSelector(
   selectQuestionState,
-  (state: QuestionState) => state.isLoading
+  (state) => state.isLoading
 );
 
-export const selectQuestionsError = createSelector(
+export const selectQuestionError = createSelector(
   selectQuestionState,
-  (state: QuestionState) => state.error
+  (state) => state.error
+);
+export const selectUserQuestions = createSelector(
+  selectQuestionState,
+  (state: QuestionState, userId: string) => state.questions.filter(q => q.userId === userId)
 );

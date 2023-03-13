@@ -5,3 +5,9 @@ export interface AppState {
     user: AuthState;
     question: QuestionState;
 }
+
+// export const initialQuestionState: QuestionState = {
+//     questions: [],
+//     loading: false,
+//     error: null
+//   };

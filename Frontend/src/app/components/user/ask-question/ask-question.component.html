@@ -1,11 +1,11 @@
 <app-header></app-header>
 
-<div class="maincontainer"> 
+<div class="maincontainer">
     <form [formGroup]="form" (ngSubmit)="submitData()">
         <h4>ASK YOUR QUESTION BELOW:</h4>
         <div class="title">
             <label>Title:</label>
-            <input type="text" name="title" required formControlName="title" >
+            <input type="text" name="title" required formControlName="title">
             <span class="error" *ngIf="!form.get('title')?.valid && form.get('title')?.touched">Please
                 Enter a Valid Question Title</span>
         </div>
@@ -30,7 +30,7 @@
                 Choose a Valid Tag Option</span>
         </div>
         <div>
-            <button class="postQuestion">POST QUESTION</button>
+            <button class="postQuestion" [disabled]="form.invalid" >POST QUESTION</button>
         </div>
     </form>
 

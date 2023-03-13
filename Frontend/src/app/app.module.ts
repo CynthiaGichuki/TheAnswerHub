@@ -7,12 +7,14 @@ import { HeaderComponent } from './components/user/header/header.component';
 import { ReactiveFormsModule } from '@angular/forms'
 import { HttpClientModule } from '@angular/common/http';
 import { StoreModule } from '@ngrx/store';
+import { QuestionEffects } from './state/Effects/question.effects';
+import { AuthEffects } from './state/Effects/auth.effects';
 
 @NgModule({
     declarations: [
         AppComponent,
     ],
-    providers: [],
+    providers: [QuestionEffects, AuthEffects],
     bootstrap: [AppComponent],
     imports: [
         BrowserModule,
@@ -21,7 +23,7 @@ import { StoreModule } from '@ngrx/store';
         HttpClientModule,
         HeaderComponent,
         StoreModule.forRoot({}, {}),
-     
+
     ]
 })
 export class AppModule { }

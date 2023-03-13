@@ -12,17 +12,18 @@ import {
   updateQuestion
 } from '../../../state/Actions/question.action';
 import {
-  selectQuestions,
-  selectQuestionsError,
-  selectQuestionsLoading
+  selectAllQuestions,
+  selectQuestionError,
+  selectQuestionLoading
 } from '../../../state/Selectors/question.selector';
 import { Question } from 'src/app/interfaces/interfaces';
+import { QuestionListComponent } from '../question-list/question-list.component';
 
 @Component({
   selector: 'app-question',
   templateUrl: './question.component.html',
   standalone: true,
-  imports: [CommonModule, RouterModule, AskQuestionComponent],
+  imports: [CommonModule, RouterModule, AskQuestionComponent, QuestionListComponent],
   styleUrls: ['./question.component.scss']
 })
 export class QuestionComponent implements OnInit {
@@ -32,13 +33,11 @@ export class QuestionComponent implements OnInit {
   isLoading$: Observable<boolean> = new Observable<boolean>();
   error$: Observable<string> = new Observable<string>();
 
-
-
   ngOnInit() {
     this.store.dispatch(loadQuestions());
-    this.questions$ = this.store.select(selectQuestions);
-    this.isLoading$ = this.store.select(selectQuestionsLoading);
-    this.error$ = this.store.select(selectQuestionsError);
+    this.questions$ = this.store.select(selectAllQuestions);
+    this.isLoading$ = this.store.select(selectQuestionLoading);
+    this.error$ = this.store.select(selectQuestionError);
   }
 
   onAddQuestion(question: Question) {
@@ -50,6 +49,6 @@ export class QuestionComponent implements OnInit {
   }
 
   onDeleteQuestion(id: string) {
-    this.store.dispatch(deleteQuestion({ id: Number(id) }));
+    this.store.dispatch(deleteQuestion({ id: String(id) }));
   }
 }

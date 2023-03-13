@@ -4,16 +4,17 @@ import { User } from 'src/app/interfaces/interfaces';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
 import { UsersService } from 'src/app/services/users.service';
+import { HeaderComponent } from '../header/header.component';
 
 @Component({
   selector: 'app-register',
   standalone: true,
-  imports: [CommonModule, RouterModule, ReactiveFormsModule],
+  imports: [CommonModule, RouterModule, ReactiveFormsModule, HeaderComponent],
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit {
-  user: User = { fullname: '', email: '', username: '', password: '' };
+  user: User = { userId:'',fullname: '', email: '', username: '', password: '' };
   // error = '';
   form!: FormGroup
 

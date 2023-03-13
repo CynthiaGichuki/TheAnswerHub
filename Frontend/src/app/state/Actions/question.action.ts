@@ -1,5 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-import { Question } from 'src/app/interfaces/interfaces';
+import { Question } from '../../interfaces/interfaces';
 
 export const loadQuestions = createAction('[Question] Load Questions');
 
@@ -45,12 +45,12 @@ export const updateQuestionFailure = createAction(
 
 export const deleteQuestion = createAction(
   '[Question] Delete Question',
-  props<{ id: number }>()
+  props<{ id: string }>()
 );
 
 export const deleteQuestionSuccess = createAction(
   '[Question] Delete Question Success',
-  props<{ id: number }>()
+  props<{ id: string }>()
 );
 
 export const deleteQuestionFailure = createAction(

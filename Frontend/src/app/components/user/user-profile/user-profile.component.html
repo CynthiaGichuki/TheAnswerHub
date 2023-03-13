@@ -92,20 +92,14 @@
                 <img class="votesIcons" src="../../../../assets/icons/thumb-down.png" title="Downvote this Question">
             </div>
             <div class="questionContent">
-                <div class="title">
-                    <h3> How Do I undo the most recent commits in git</h3>
+                <div *ngFor="let question of userQuestions$ | async">
+                    <h2>{{ question.title }}</h2>
+                    <p>{{ question.description }}</p>
+                    <p>Tags: {{ question.tags }}</p>
+                    <button (click)="onDeleteQuestion(question.id)">Delete</button>
+                    <button (click)="onUpdateQuestion(question)">Edit</button>
                 </div>
-                <div class="description">
-                    How Do I undo the most recent commits in git
-                </div>
-                <div class="viewQuestion">
-                    <h5>10 answers</h5>
-                    <button routerLink="/question">VIEW QUESTION</button>
-                    <div class="iconsClass">
-                        <img class="icons" src="../../../../assets/icons/edit.png" title="Edit this Question">
-                        <img class="icons" src="../../../../assets/icons/delete.png" title="Delete this Question">
-                    </div>
-                </div>
+
             </div>
         </div>
 
