@@ -1,0 +1,4 @@
+CREATE PROCEDURE getAllQuestions AS BEGIN
+SELECT *
+FROM Questions;
+END;
