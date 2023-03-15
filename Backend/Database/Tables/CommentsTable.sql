@@ -1,0 +1,11 @@
+CREATE TABLE Comments(
+    commentID VARCHAR(255) NOT NULL PRIMARY KEY,
+    commentDescription VARCHAR(255) NOT NULL,
+    userID VARCHAR(255) NOT NULL,
+    FOREIGN KEY (userID) REFERENCES Users(userID),
+    answerID VARCHAR(255) NOT NULL,
+    FOREIGN KEY (answerID) REFERENCES Answers(answerID),
+    created_at DATETIME NOT NULL DEFAULT GETDATE(),
+    CHECK (created_at <= GETDATE()),
+    CHECK (commentDescription <> '')
+)

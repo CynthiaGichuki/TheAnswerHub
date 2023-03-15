@@ -1,5 +1,5 @@
 export interface User {
-    userId:string
+    userId: string
     fullname: string
     email: string
     username: string
@@ -15,7 +15,7 @@ export interface Question {
     description: string;
     tags: string[];
     date: Date;
-    userId:string;
+    userId: string;
 }
 export interface QuestionState {
     questions: Question[];

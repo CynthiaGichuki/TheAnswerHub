@@ -1,0 +1,5 @@
+CREATE PROCEDURE GetAnswerById @answerID VARCHAR(255) AS BEGIN
+SELECT *
+FROM Answers
+WHERE answerID = @answerID
+END
