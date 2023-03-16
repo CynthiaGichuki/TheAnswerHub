@@ -4,8 +4,8 @@ CREATE TABLE Comments(
     userID VARCHAR(255) NOT NULL,
     FOREIGN KEY (userID) REFERENCES Users(userID),
     answerID VARCHAR(255) NOT NULL,
-    FOREIGN KEY (answerID) REFERENCES Answers(answerID),
+    FOREIGN KEY (answerID) REFERENCES Answers(answerID) ON DELETE CASCADE,
     created_at DATETIME NOT NULL DEFAULT GETDATE(),
     CHECK (created_at <= GETDATE()),
     CHECK (commentDescription <> '')
-)
+);

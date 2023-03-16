@@ -1,0 +1,4 @@
+CREATE PROCEDURE getAllAnswerVotes
+AS BEGIN
+SELECT * FROM answerVotes;
+END;

@@ -3,7 +3,8 @@ CREATE PROCEDURE InsertOrUpdateUser @userID VARCHAR(255),
 @email VARCHAR(255),
 @username VARCHAR(255),
 @password VARCHAR(255),
-@is_admin BIT AS BEGIN IF EXISTS (
+@is_admin BIT,
+@is_deleted BIT AS BEGIN IF EXISTS (
     SELECT *
     FROM Users
     WHERE userID = @userID
@@ -13,7 +14,8 @@ SET fullname = @fullname,
     email = @email,
     username = @username,
     password = @password,
-    is_admin = @is_admin
+    is_admin = @is_admin,
+    is_deleted = @is_deleted
 WHERE userID = @userID
 SELECT *
 FROM Users
