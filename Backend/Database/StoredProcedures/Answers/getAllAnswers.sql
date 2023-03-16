@@ -1,5 +1,4 @@
-CREATE PROCEDURE getAllAnswers 
-AS
-BEGIN
-    SELECT * FROM Answers;
+CREATE PROCEDURE getAllAnswers AS BEGIN
+SELECT *
+FROM Answers;
 END;

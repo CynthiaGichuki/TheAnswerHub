@@ -22,11 +22,21 @@ var __importStar = (this && this.__importStar) || function (mod) {
     __setModuleDefault(result, mod);
     return result;
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importStar(require("express"));
+const dotenv_1 = __importDefault(require("dotenv"));
+const path_1 = __importDefault(require("path"));
+dotenv_1.default.config({ path: path_1.default.resolve(__dirname, '../../.env') });
 const app = (0, express_1.default)();
 //middlewares
 app.use((0, express_1.json)());
+// const PORT = process.env.PORT || 4000;
+// app.listen(PORT, () => {
+//     console.log(`Server running on port ${PORT}`);   
+// });
 app.listen(4000, () => {
-    console.log("App is running...");
+    console.log('Server is running on port 4000');
 });

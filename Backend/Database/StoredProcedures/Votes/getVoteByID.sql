@@ -1,6 +1,0 @@
-CREATE PROCEDURE getVoteByID
-    @voteID VARCHAR(255)
-AS
-BEGIN
-    SELECT * FROM Votes WHERE voteID = @voteID
-END
