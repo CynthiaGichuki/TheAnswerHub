@@ -1,21 +1,19 @@
-import express, { json } from 'express'
+import express, { Express } from 'express'
+import userRouter from './Routers/userRouter';
 import dotenv from 'dotenv';
 import path from 'path';
-dotenv.config({ path: path.resolve(__dirname, '../../.env') })
+import cors from 'cors';
+dotenv.config({ path: path.resolve(__dirname, '../.env') })
 
-const app = express()
+const app: Express = express()
 
-//middlewares
-app.use(json())
+app.use(express.json())
+app.use(cors())
+
+app.use('/users', userRouter)
 
 
-// const PORT = process.env.PORT || 4000;
-
-// app.listen(PORT, () => {
-//     console.log(`Server running on port ${PORT}`);   
-// });
-
-app.listen(4000, ()=>{
-    console.log('Server is running on port 4000');
-    
+const PORT = process.env.PORT
+app.listen(4003, () => {
+    console.log(`Server is running on port ${PORT}`);
 })

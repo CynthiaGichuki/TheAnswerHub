@@ -1,5 +1,5 @@
 import mssql from 'mssql'
-import sqlConfig from '../config/dbConfig'
+import sqlConfig from '../Config/dbConfig'
 
 
 /**
