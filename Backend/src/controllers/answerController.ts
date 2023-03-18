@@ -98,51 +98,51 @@ export const getAnswerById = async (req: ExtendedRequest, res: Response) => {
 //get answervote count
 export const getAnswerVoteCount = async (req: ExtendedRequest, res: Response) => {
   try {
-      const answerID = req.params.answerID;
+    const answerID = req.params.answerID;
 
-      if (!answerID) {
-          return res.status(400).json({ message: 'Answer ID not provided' });
-      }
+    if (!answerID) {
+      return res.status(400).json({ message: 'Answer ID not provided' });
+    }
 
-      if (db.checkConnection() as unknown as boolean) {
-          const result = await db.exec('getAnswerVoteCount', { answerID });
+    if (db.checkConnection() as unknown as boolean) {
+      const result = await db.exec('getAnswerVoteCount', { answerID });
 
-          if (result && result[0] && result[0].voteCount !== undefined) {
-              const voteCount = result[0].voteCount;
-              res.status(200).json({ voteCount });
-          } else {
-              res.status(404).json({ message: 'Answer not found or has no votes' });
-          }
+      if (result && result[0] && result[0].voteCount !== undefined) {
+        const voteCount = result[0].voteCount;
+        res.status(200).json({ voteCount });
       } else {
-          res.status(500).json({ message: 'Error connecting to database' });
+        res.status(404).json({ message: 'Answer not found or has no votes' });
       }
+    } else {
+      res.status(500).json({ message: 'Error connecting to database' });
+    }
   } catch (error) {
-      res.status(500).json(error);
+    res.status(500).json(error);
   }
 };
 
 //delete answer
 export const deleteAnswer = async (req: Request, res: Response) => {
   try {
-      const answerID = req.params.answerID;
-      if (db.checkConnection() as unknown as boolean) {
-          const answerFound: answerModel[] = await db.exec('GetAnswerById', { answerID: answerID });
+    const answerID = req.params.answerID;
+    if (db.checkConnection() as unknown as boolean) {
+      const answerFound: answerModel[] = await db.exec('GetAnswerById', { answerID: answerID });
 
-          if (answerFound.length > 0) {
+      if (answerFound.length > 0) {
 
-              await db.exec('deleteAnswer', { answerID: answerFound[0].answerID });
+        await db.exec('deleteAnswer', { answerID: answerFound[0].answerID });
 
 
-              res.status(200).json({ message: 'Answer deleted successfully' });
+        res.status(200).json({ message: 'Answer deleted successfully' });
 
-          } else {
-              res.status(500).json({ message: 'Answer not found' });
-          }
       } else {
-          res.status(500).json({ message: 'Error connecting to database' });
+        res.status(500).json({ message: 'Answer not found' });
       }
+    } else {
+      res.status(500).json({ message: 'Error connecting to database' });
+    }
   } catch (error) {
-      res.status(500).json(error);
+    res.status(500).json(error);
   }
 }
 

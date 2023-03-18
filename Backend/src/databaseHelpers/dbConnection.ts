@@ -1,5 +1,5 @@
 import mssql from 'mssql'
-import sqlConfig from '../Config/dbConfig'
+import sqlConfig from '../config/dbConfig'
 
 
 /**
@@ -46,7 +46,7 @@ class DatabaseConnect {
     checkConnection() {
         return this.pool.then(() => {
             return true
-            
+
         }).catch(() => {
             return false
         })
