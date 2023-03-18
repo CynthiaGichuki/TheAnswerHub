@@ -153,15 +153,6 @@ const deleteUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
         if (dbConnection_1.default.checkConnection()) {
             const userFound = yield dbConnection_1.default.exec('getUserById', { userID: userID });
             if (userFound.length > 0) {
-                // const user = {
-                //     userID: userFound[0].userID,
-                //     name: userFound[0].fullname,
-                //     email: userFound[0].email,
-                //     username: userFound[0].username,
-                //     password: userFound[0].password,
-                //     isAdmin: userFound[0].is_admin,
-                //     isDeleted: userFound[0].is_deleted
-                // }
                 yield dbConnection_1.default.exec('deleteUser', { userID: userFound[0].userID });
                 res.status(200).json({ message: 'User deleted successfully' });
             }

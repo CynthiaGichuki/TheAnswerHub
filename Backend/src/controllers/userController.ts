@@ -166,15 +166,6 @@ export const deleteUser = async (req: Request, res: Response) => {
             const userFound: UserModel[] = await db.exec('getUserById', { userID: userID });
 
             if (userFound.length > 0) {
-                // const user = {
-                //     userID: userFound[0].userID,
-                //     name: userFound[0].fullname,
-                //     email: userFound[0].email,
-                //     username: userFound[0].username,
-                //     password: userFound[0].password,
-                //     isAdmin: userFound[0].is_admin,
-                //     isDeleted: userFound[0].is_deleted
-                // }
 
                 await db.exec('deleteUser', { userID: userFound[0].userID });
 
