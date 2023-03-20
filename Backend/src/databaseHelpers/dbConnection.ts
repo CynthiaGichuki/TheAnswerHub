@@ -46,7 +46,7 @@ class DatabaseConnect {
     checkConnection() {
         return this.pool.then(() => {
             return true
-            
+
         }).catch(() => {
             return false
         })
