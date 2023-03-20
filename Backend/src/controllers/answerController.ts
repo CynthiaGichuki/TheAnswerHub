@@ -1,7 +1,5 @@
 import { Request, Response } from 'express';
 import { v4 as uuidv4 } from 'uuid';
-import bcrypt from 'bcrypt';
-import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
 import path from 'path';
 import db from '../databaseHelpers/dbConnection';
@@ -146,3 +144,23 @@ export const deleteAnswer = async (req: Request, res: Response) => {
   }
 }
 
+//getAnswerDownVotes
+// export const getAnswerDownVotes = async (req: ExtendedRequest, res: Response) => {
+//   try {
+//       const answerID = req.params.answerID;
+
+//       if (!answerID) {
+//           return res.status(400).json({ message: 'Answer ID not provided' });
+//       }
+
+//       if (db.checkConnection() as unknown as boolean) {
+//           const downVotes = await db.exec('getAnswerDownVotes', { answerID: answerID }) [0]['downVotes'];
+
+//           res.status(200).json({ downVotes: downVotes });
+//       } else {
+//           res.status(500).json({ message: 'Error connecting to database' })
+//       }
+//   } catch (error) {
+//       res.status(500).json(error)
+//   }
+// }

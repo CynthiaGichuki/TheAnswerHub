@@ -1,4 +1,4 @@
-CREATE PROCEDURE InsertOrUpdateQuestion @questionID VARCHAR(255),
+CREATE OR ALTER PROCEDURE InsertOrUpdateQuestion @questionID VARCHAR(255),
 @title VARCHAR(255),
 @tagName VARCHAR(255),
 @description VARCHAR(255),
@@ -34,5 +34,9 @@ VALUES (
         @userID,
         GETDATE()
     )
+    SELECT *
+FROM Questions
+WHERE questionID = @questionID
 END
 END
+

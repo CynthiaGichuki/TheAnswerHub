@@ -23,3 +23,4 @@ SELECT 'Error deleting some records.' AS Message;
 THROW;
 END CATCH
 END
+

@@ -13,7 +13,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const mssql_1 = __importDefault(require("mssql"));
-const dbConfig_1 = __importDefault(require("../Config/dbConfig"));
+const dbConfig_1 = __importDefault(require("../config/dbConfig"));
 /**
  * DatabaseConnect
  *

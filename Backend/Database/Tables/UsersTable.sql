@@ -6,6 +6,7 @@ CREATE TABLE Users(
     password VARCHAR(255) NOT NULL,
     is_admin BIT NOT NULL DEFAULT 0,
     is_deleted BIT NOT NULL DEFAULT 0,
+    is_sent BIT NOT NULL DEFAULT 0,
     CHECK (is_admin IN (0, 1)),
     CHECK (email <> ''),
     CHECK (password <> '')

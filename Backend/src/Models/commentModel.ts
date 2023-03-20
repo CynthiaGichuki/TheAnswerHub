@@ -1,4 +1,4 @@
-class questionModel {
+class commentModel {
     commentID: string;
     commentDescription: string;
     userID: string;
@@ -15,4 +15,4 @@ class questionModel {
 }
 
 
-export default questionModel;
+export default commentModel;

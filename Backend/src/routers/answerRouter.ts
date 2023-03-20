@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { addAnswer, deleteAnswer, getAllAnswers, getAnswerById, getAnswerVoteCount } from "../Controllers/answerController";
+import { addAnswer, deleteAnswer, getAllAnswers, getAnswerById, getAnswerVoteCount } from "../controllers/answerController";
 
 
 const answerRouter = Router();
@@ -7,8 +7,8 @@ const answerRouter = Router();
 answerRouter.get('', getAllAnswers);
 answerRouter.post("/addAnswer", addAnswer);
 answerRouter.get("/:answerID", getAnswerById);
-answerRouter.get("/:questionID", getAnswerVoteCount)
-answerRouter.delete("/:questionID", deleteAnswer)
+answerRouter.get("/voteCount/:answerID", getAnswerVoteCount)
+answerRouter.delete("/:answerID", deleteAnswer)
 
 
 export default answerRouter;

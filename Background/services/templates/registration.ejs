@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to TheAnswerHub</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            color: #333;
+            background-color: #f2f2f2;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        h1,
+        h2,
+        p {
+            margin: 0;
+        }
+
+        h1 {
+            font-size: 36px;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        h2 {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        p {
+            font-size: 16px;
+            line-height: 1.5;
+            margin-bottom: 20px;
+        }
+
+        .cta {
+            display: block;
+            width: 200px;
+            height: 50px;
+            margin: 0 auto;
+            background-color: #0077cc;
+            color: #fff;
+            text-align: center;
+            line-height: 50px;
+            font-size: 18px;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Welcome to TheAnswerHub</h1>
+        <p>Dear <%= username %>,</p>
+        <p>Thank you for registering on TheAnswerHub! We're thrilled to have you on board and look forward to helping
+            you find the answers you're looking for.</p>
+        <h2>What's next?</h2>
+        <p>To get started, simply log in to your account and start asking questions, answering questions, and sharing
+            your knowledge with the community. You can access your account by clicking the button below:</p>
+        <a href="<%= loginUrl %>" class="cta">Log In Now</a>
+        <p>If you have any questions or concerns, please don't hesitate to contact us. We're always here to help!</p>
+        <p>Best regards,</p>
+        <p>TheAnswerHub Team</p>
+    </div>
+</body>
+
+</html>

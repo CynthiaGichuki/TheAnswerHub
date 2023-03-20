@@ -34,7 +34,7 @@ const createUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
             password: hashedPassword
         };
         if (dbConnection_1.default.checkConnection()) {
-            const userCreated = yield dbConnection_1.default.exec('InsertOrUpdateUser', { userID: user.userID, fullname: user.fullname, email: user.email, username: user.username, password: user.password, is_admin: '0', is_deleted: '0' });
+            const userCreated = yield dbConnection_1.default.exec('InsertOrUpdateUser', { userID: user.userID, fullname: user.fullname, email: user.email, username: user.username, password: user.password, is_admin: '0', is_deleted: '0', is_sent: '0' });
             if (userCreated) {
                 const token = jsonwebtoken_1.default.sign(user, process.env.JWT_SECRET, { expiresIn: '1d' });
                 console.log(token);
@@ -126,7 +126,8 @@ const updateUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
                     username: req.body.username,
                     password: req.body.password,
                     is_admin: req.body.is_admin,
-                    is_deleted: req.body.is_deleted
+                    is_deleted: req.body.is_deleted,
+                    is_sent: req.body.is_sent
                 };
                 const userUpdated = yield dbConnection_1.default.exec('InsertOrUpdateUser', user);
                 if (userUpdated) {

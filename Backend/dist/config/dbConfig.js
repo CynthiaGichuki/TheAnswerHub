@@ -15,7 +15,7 @@ const sqlConfig = {
             password: process.env.DB_PWD
         }
     },
-    server: '172.27.57.221',
+    server: '192.168.231.252',
     options: {
         database: process.env.DB_NAME,
         encrypt: true,

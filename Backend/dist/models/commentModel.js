@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-class questionModel {
+class commentModel {
     constructor(commentID, commentDescription, userID, answerID, created_at) {
         this.commentID = commentID;
         this.commentDescription = commentDescription;
@@ -9,4 +9,4 @@ class questionModel {
         this.created_at = created_at;
     }
 }
-exports.default = questionModel;
+exports.default = commentModel;

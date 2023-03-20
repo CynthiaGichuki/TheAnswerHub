@@ -142,3 +142,20 @@ const deleteAnswer = (req, res) => __awaiter(void 0, void 0, void 0, function* (
     }
 });
 exports.deleteAnswer = deleteAnswer;
+//getAnswerDownVotes
+// export const getAnswerDownVotes = async (req: ExtendedRequest, res: Response) => {
+//   try {
+//       const answerID = req.params.answerID;
+//       if (!answerID) {
+//           return res.status(400).json({ message: 'Answer ID not provided' });
+//       }
+//       if (db.checkConnection() as unknown as boolean) {
+//           const downVotes = await db.exec('getAnswerDownVotes', { answerID: answerID }) [0]['downVotes'];
+//           res.status(200).json({ downVotes: downVotes });
+//       } else {
+//           res.status(500).json({ message: 'Error connecting to database' })
+//       }
+//   } catch (error) {
+//       res.status(500).json(error)
+//   }
+// }

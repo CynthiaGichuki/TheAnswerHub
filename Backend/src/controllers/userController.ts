@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import UserModel from '../Models/UserModel';
-import { v4 as uuidv4 } from 'uuid';
+import { v4 as uuid } from 'uuid';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
@@ -30,7 +30,7 @@ export const createUser = async (req: ExtendedRequest, res: Response) => {
         const salt = await bcrypt.genSalt(10);
         const hashedPassword = await bcrypt.hash(password, salt);
         const user = {
-            userID: uuidv4() as string,
+            userID: uuid() as string,
             fullname: fullname as string,
             email: email as string,
             username: username as string,
@@ -38,7 +38,7 @@ export const createUser = async (req: ExtendedRequest, res: Response) => {
         }
 
         if (db.checkConnection() as unknown as boolean) {
-            const userCreated = await db.exec('InsertOrUpdateUser', { userID: user.userID, fullname: user.fullname, email: user.email, username: user.username, password: user.password, is_admin: '0', is_deleted: '0' });
+            const userCreated = await db.exec('InsertOrUpdateUser', { userID: user.userID, fullname: user.fullname, email: user.email, username: user.username, password: user.password, is_admin: '0', is_deleted: '0', is_sent: '0' });
 
             if (userCreated) {
                 const token = jwt.sign(user, process.env.JWT_SECRET as string, { expiresIn: '1d' });
@@ -138,7 +138,8 @@ export const updateUser = async (req: Request, res: Response) => {
                     username: req.body.username,
                     password: req.body.password,
                     is_admin: req.body.is_admin,
-                    is_deleted: req.body.is_deleted
+                    is_deleted: req.body.is_deleted,
+                    is_sent: req.body.is_sent
                 }
 
                 const userUpdated = await db.exec('InsertOrUpdateUser', user);

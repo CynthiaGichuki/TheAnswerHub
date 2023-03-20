@@ -1,9 +1,11 @@
 import { Request, Response, RequestHandler } from 'express';
-import { v4 as uuidv4 } from 'uuid';
+import { v4 as uuid } from 'uuid';
 import db from '../databaseHelpers/dbConnection';
 import { validateQuestion } from '../helpers/questionValidate';
 import questionModel from '../Models/questionModel';
-
+import dotenv from 'dotenv';
+import path from 'path';
+dotenv.config({ path: path.resolve(__dirname, '../../.env') })
 
 interface ExtendedRequest extends Request {
     body: {
@@ -19,46 +21,34 @@ interface ExtendedRequest extends Request {
 
 //Add a new question
 
-export const addQuestion: RequestHandler = async (req: Request, res: Response) => {
-
+export const addQuestion = async (req: ExtendedRequest, res: Response) => {
     try {
-        const { title, description, tagName, userID, is_deleted} = req.body;
-
         const question = {
-            questionID: uuidv4() as string,
-            title: title as string,
-            description: description as string,
-            tagName: tagName as string,
-            userID: userID as string,
-            is_deleted: is_deleted as string,
+            questionID: uuid() as string,
+            title: req.body.title as string,
+            description: req.body.description as string,
+            tagName: req.body.tagName as string,
+            userID: req.body.userID as string
         }
 
-        // const { error } = validateQuestion(question);
-        // if (error) return res.status(400).send(error.details[0].message);
-
+        // const { error } = validateQuestion(question)
+        // if (error) return res.status(400).send(error.details[0].message)
 
         if (db.checkConnection() as unknown as boolean) {
-            const insertedQuestion = await db.exec("InsertOrUpdateQuestion", {...question });
+            const savedQuestion = await db.exec("InsertOrUpdateQuestion", { questionID: question.questionID, title: question.title, description: question.description, tagName: question.tagName, userID: question.userID, is_deleted: '0' })
+            console.log(savedQuestion);
+            if (savedQuestion) {
 
-            if (insertedQuestion) {
-                res.status(200).send(insertedQuestion);
+                res.status(201).send(savedQuestion)
+            } else {
+                res.status(422).send({ message: "Error creating question" })
             }
-            else {
-                res.status(500).send("Error adding new question");
-            }
-
         } else {
-            res.status(500).send("Error adding new question");
+            res.status(500).send({ message: "Error connecting to database" })
         }
-
     } catch (error) {
-
-        console.log(error);
-
-        res.status(500).send("Error adding new question");
-
+        res.status(500).send(error)
     }
-
 }
 
 //get All Questions

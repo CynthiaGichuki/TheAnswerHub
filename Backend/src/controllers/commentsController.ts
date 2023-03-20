@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 import { v4 as uuidv4 } from 'uuid';
 import db from '../databaseHelpers/dbConnection';
+import commentModel from '../Models/commentModel';
 
 interface ExtendedRequest extends Request {
     body: {
@@ -72,23 +73,21 @@ export const getCommentById = async (req: ExtendedRequest, res: Response) => {
 // get all comments
 export const getAllComments = async (req: Request, res: Response) => {
     try {
-        if (db.checkConnection() as unknown as boolean) {
-            const comments = await db.exec('getAllComments');
-
-
-            if (comments.length > 0) {
-                res.status(200).json(comments);
-            } else {
-                res.status(200).json({ message: 'No comments found' });
-            }
+      if (db.checkConnection() as unknown as boolean) {
+        const comments: commentModel[] = await db.exec('getAllComments');
+  
+        if (comments.length > 0) {
+          res.status(200).json(comments);
         } else {
-            res.status(500).json({ message: 'Error connecting to database' });
+          res.status(200).json({ message: 'No comments found' });
         }
+      } else {
+        res.status(500).json({ message: 'Error connecting to database' });
+      }
     } catch (error) {
-        res.status(500).json(error);
+      res.status(500).json(error);
     }
-};
-
+  }
 // delete comment
 export const deleteComment = async (req: ExtendedRequest, res: Response) => {
     try {

@@ -15,36 +15,37 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.deleteQuestion = exports.getQuestionByVoteCount = exports.updateQuestion = exports.getQuestionById = exports.getAllQuestions = exports.addQuestion = void 0;
 const uuid_1 = require("uuid");
 const dbConnection_1 = __importDefault(require("../databaseHelpers/dbConnection"));
+const dotenv_1 = __importDefault(require("dotenv"));
+const path_1 = __importDefault(require("path"));
+dotenv_1.default.config({ path: path_1.default.resolve(__dirname, '../../.env') });
 //Add a new question
 const addQuestion = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const { title, description, tagName, userID, is_deleted } = req.body;
         const question = {
             questionID: (0, uuid_1.v4)(),
-            title: title,
-            description: description,
-            tagName: tagName,
-            userID: userID,
-            is_deleted: is_deleted,
+            title: req.body.title,
+            description: req.body.description,
+            tagName: req.body.tagName,
+            userID: req.body.userID
         };
-        // const { error } = validateQuestion(question);
-        // if (error) return res.status(400).send(error.details[0].message);
+        // const { error } = validateQuestion(question)
+        // if (error) return res.status(400).send(error.details[0].message)
         if (dbConnection_1.default.checkConnection()) {
-            const insertedQuestion = yield dbConnection_1.default.exec("InsertOrUpdateQuestion", Object.assign({}, question));
-            if (insertedQuestion) {
-                res.status(200).send(insertedQuestion);
+            const savedQuestion = yield dbConnection_1.default.exec("InsertOrUpdateQuestion", { questionID: question.questionID, title: question.title, description: question.description, tagName: question.tagName, userID: question.userID, is_deleted: '0' });
+            console.log(savedQuestion);
+            if (savedQuestion) {
+                res.status(201).send(savedQuestion);
             }
             else {
-                res.status(500).send("Error adding new question");
+                res.status(422).send({ message: "Error creating question" });
             }
         }
         else {
-            res.status(500).send("Error adding new question");
+            res.status(500).send({ message: "Error connecting to database" });
         }
     }
     catch (error) {
-        console.log(error);
-        res.status(500).send("Error adding new question");
+        res.status(500).send(error);
     }
 });
 exports.addQuestion = addQuestion;

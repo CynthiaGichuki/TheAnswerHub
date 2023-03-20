@@ -3,3 +3,4 @@ SELECT *
 FROM Users
 WHERE email = @email;
 END;
+
