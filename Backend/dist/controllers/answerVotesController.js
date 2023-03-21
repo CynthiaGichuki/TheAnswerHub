@@ -12,11 +12,11 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getAllAnswerVotes = exports.getAnswerVoteByID = exports.insertOrUpdateAnswerVote = void 0;
+exports.getAllAnswerVotes = exports.getAnswerVoteByID = exports.InsertOrUpdateAnswerVote = void 0;
 const uuid_1 = require("uuid");
 const dbConnection_1 = __importDefault(require("../databaseHelpers/dbConnection"));
 //add new answer vote
-const insertOrUpdateAnswerVote = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+const InsertOrUpdateAnswerVote = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const { userID, answerID, vote_type } = req.body;
         const vote = {
@@ -59,7 +59,7 @@ const insertOrUpdateAnswerVote = (req, res) => __awaiter(void 0, void 0, void 0,
         res.status(500).json(error);
     }
 });
-exports.insertOrUpdateAnswerVote = insertOrUpdateAnswerVote;
+exports.InsertOrUpdateAnswerVote = InsertOrUpdateAnswerVote;
 //get Answer Vote By ID
 const getAnswerVoteByID = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {

@@ -12,7 +12,7 @@ const sqlConfig = {
       password: process.env.DB_PWD
     }
   },
-  server: '192.168.231.252',
+  server: '172.29.109.106',
   options: {
     database: process.env.DB_NAME,
     encrypt: true, // for azure

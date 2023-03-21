@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { v4 as uuidv4 } from 'uuid';
+import { v4 as uuid } from 'uuid';
 import db from '../databaseHelpers/dbConnection';
 import answerVotesModel from '../Models/answerVotesModel';
 
@@ -18,14 +18,14 @@ interface ExtendedRequest extends Request {
 
 //add new answer vote
 
-export const insertOrUpdateAnswerVote = async (req: Request, res: Response) => {
+export const InsertOrUpdateAnswerVote = async (req: Request, res: Response) => {
     try {
         const { userID, answerID, vote_type } = req.body;
         const vote = {
-            voteID: uuidv4() as string,
+            voteID: uuid() as string,
             userID: userID as string,
             answerID: answerID as string,
-            vote_type: vote_type as string 
+            vote_type: vote_type as string
         };
 
         if (!vote.userID || !vote.answerID || !vote.vote_type) {

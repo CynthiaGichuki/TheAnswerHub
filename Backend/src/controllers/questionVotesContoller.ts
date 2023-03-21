@@ -8,22 +8,22 @@ interface ExtendedRequest extends Request {
         userID: string;
         questionID: string;
         vote_type: string;
-
     },
+    
     params: {
         voteID: string;
     }
 }
 
 //add question vote
-export const insertOrUpdateQuestionVote = async (req: Request, res: Response) => {
+export const InsertOrUpdateQuestionVote = async (req: Request, res: Response) => {
     try {
         const { userID, questionID, vote_type } = req.body;
         const vote = {
             voteID: uuidv4() as string,
             userID: userID as string,
             questionID: questionID as string,
-            vote_type: vote_type as string 
+            vote_type: vote_type as string
         };
 
         if (!vote.userID || !vote.questionID || !vote.vote_type) {
@@ -59,7 +59,6 @@ export const insertOrUpdateQuestionVote = async (req: Request, res: Response) =>
         res.status(500).json(error);
     }
 }
-
 
 
 //get question vote by ID

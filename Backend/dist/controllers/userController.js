@@ -34,7 +34,7 @@ const createUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
             password: hashedPassword
         };
         if (dbConnection_1.default.checkConnection()) {
-            const userCreated = yield dbConnection_1.default.exec('InsertOrUpdateUser', { userID: user.userID, fullname: user.fullname, email: user.email, username: user.username, password: user.password, is_admin: '0', is_deleted: '0', is_sent: '0' });
+            const userCreated = yield dbConnection_1.default.exec('addUser', { userID: user.userID, fullname: user.fullname, email: user.email, username: user.username, password: user.password, is_admin: '0', is_deleted: '0', is_sent: '0' });
             if (userCreated) {
                 const token = jsonwebtoken_1.default.sign(user, process.env.JWT_SECRET, { expiresIn: '1d' });
                 console.log(token);
@@ -45,7 +45,7 @@ const createUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
             }
         }
         else {
-            console.log("test");
+            // console.log("test")
             res.status(500).json({ message: 'Error connecting to database' });
         }
     }
@@ -84,7 +84,7 @@ const loginUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     }
 });
 exports.loginUser = loginUser;
-// get a user
+// get a user by ID
 const getUserById = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const id = req.params.userID;
@@ -94,7 +94,7 @@ const getUserById = (req, res) => __awaiter(void 0, void 0, void 0, function* ()
         if (dbConnection_1.default.checkConnection()) {
             const user = yield dbConnection_1.default.exec('getUserById', { userID: id });
             console.log(user);
-            if (user) {
+            if (user && user.length > 0) {
                 res.status(200).json(user[0]);
             }
             else {
@@ -115,7 +115,6 @@ const updateUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
     try {
         const userID = req.params.userID;
         // get user from database
-        console.log("body", req.body);
         if (dbConnection_1.default.checkConnection()) {
             const userFound = yield dbConnection_1.default.exec('getUserById', { userID: userID });
             if (userFound.length > 0) {
@@ -125,12 +124,12 @@ const updateUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
                     email: req.body.email,
                     username: req.body.username,
                     password: req.body.password,
-                    is_admin: req.body.is_admin,
-                    is_deleted: req.body.is_deleted,
-                    is_sent: req.body.is_sent
+                    is_admin: req.body.is_admin = '0',
+                    is_deleted: req.body.is_deleted = '0',
+                    is_sent: req.body.is_sent = '0'
                 };
-                const userUpdated = yield dbConnection_1.default.exec('InsertOrUpdateUser', user);
-                if (userUpdated) {
+                const userUpdated = yield dbConnection_1.default.exec('updateUser', user);
+                if (userUpdated && userUpdated.length > 0) {
                     res.status(200).json({ message: 'User updated successfully', userUpdated });
                 }
             }

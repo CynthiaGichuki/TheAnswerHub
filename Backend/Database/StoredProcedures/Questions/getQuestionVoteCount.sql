@@ -10,4 +10,3 @@ WHERE questionID = @questionID
     AND vote_type = 'downvote'
 SELECT @voteCount AS voteCount
 END
-

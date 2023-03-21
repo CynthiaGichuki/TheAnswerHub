@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.deleteComment = exports.getAllComments = exports.getCommentById = exports.addComment = void 0;
+exports.deleteComment = exports.getAllComments = exports.getCommentById = exports.updateComment = exports.addComment = void 0;
 const uuid_1 = require("uuid");
 const dbConnection_1 = __importDefault(require("../databaseHelpers/dbConnection"));
 // create a new comment
@@ -21,14 +21,14 @@ const addComment = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
         const { commentDescription, userID, answerID } = req.body;
         const commentID = (0, uuid_1.v4)();
         if (dbConnection_1.default.checkConnection()) {
-            const commentCreated = yield dbConnection_1.default.exec('InsertOrUpdateComment', {
+            const commentCreated = yield dbConnection_1.default.exec('addComment', {
                 commentID,
                 commentDescription,
                 userID,
                 answerID,
             });
             if (commentCreated) {
-                res.status(200).json({ message: 'Comment created successfully' });
+                res.status(201).json({ message: 'Comment created successfully', commentCreated });
             }
             else {
                 res.status(500).json({ message: 'Error creating comment' });
@@ -44,6 +44,37 @@ const addComment = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
     }
 });
 exports.addComment = addComment;
+//update a comment
+const updateComment = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const commentID = req.params.commentID;
+        if (dbConnection_1.default.checkConnection()) {
+            const commentFound = yield dbConnection_1.default.exec('getCommentById', { commentID: commentID });
+            if (commentFound.length > 0) {
+                const comment = {
+                    commentID: commentFound[0].commentID,
+                    commentDescription: req.body.commentDescription,
+                    userID: req.body.userID,
+                    answerID: req.body.answerID
+                };
+                const commentUpdated = yield dbConnection_1.default.exec('updateComment', { commentID: comment.commentID, commentDescription: comment.commentDescription, userID: comment.userID, answerID: comment.answerID });
+                if (commentUpdated) {
+                    res.status(201).json({ message: 'Comment updated successfully', commentUpdated });
+                }
+            }
+            else {
+                res.status(404).json({ message: 'Comment not found' });
+            }
+        }
+        else {
+            res.status(500).json({ message: 'Error connecting to database' });
+        }
+    }
+    catch (error) {
+        res.status(500).json(error);
+    }
+});
+exports.updateComment = updateComment;
 // get comment by ID
 const getCommentById = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {

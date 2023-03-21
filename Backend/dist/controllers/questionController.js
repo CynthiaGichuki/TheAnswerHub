@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.deleteQuestion = exports.getQuestionByVoteCount = exports.updateQuestion = exports.getQuestionById = exports.getAllQuestions = exports.addQuestion = void 0;
+exports.deleteQuestion = exports.getQuestionVoteCount = exports.updateQuestion = exports.getQuestionById = exports.getAllQuestions = exports.addQuestion = void 0;
 const uuid_1 = require("uuid");
 const dbConnection_1 = __importDefault(require("../databaseHelpers/dbConnection"));
 const dotenv_1 = __importDefault(require("dotenv"));
@@ -31,10 +31,9 @@ const addQuestion = (req, res) => __awaiter(void 0, void 0, void 0, function* ()
         // const { error } = validateQuestion(question)
         // if (error) return res.status(400).send(error.details[0].message)
         if (dbConnection_1.default.checkConnection()) {
-            const savedQuestion = yield dbConnection_1.default.exec("InsertOrUpdateQuestion", { questionID: question.questionID, title: question.title, description: question.description, tagName: question.tagName, userID: question.userID, is_deleted: '0' });
-            console.log(savedQuestion);
+            const savedQuestion = yield dbConnection_1.default.exec("createQuestion", { questionID: question.questionID, title: question.title, description: question.description, tagName: question.tagName, userID: question.userID, is_deleted: '0' });
             if (savedQuestion) {
-                res.status(201).send(savedQuestion);
+                res.status(201).json({ message: "Question Created Successfully" });
             }
             else {
                 res.status(422).send({ message: "Error creating question" });
@@ -79,8 +78,7 @@ const getQuestionById = (req, res) => __awaiter(void 0, void 0, void 0, function
         }
         if (dbConnection_1.default.checkConnection()) {
             const question = yield dbConnection_1.default.exec('GetQuestionById', { questionID: questionID });
-            // console.log(question);
-            if (question) {
+            if (question && question.length > 0) {
                 res.status(200).json(question[0]);
             }
             else {
@@ -100,7 +98,6 @@ exports.getQuestionById = getQuestionById;
 const updateQuestion = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const questionID = req.params.questionID;
-        // console.log("body", req.body);
         if (dbConnection_1.default.checkConnection()) {
             const questionFound = yield dbConnection_1.default.exec('GetQuestionById', { questionID: questionID });
             if (questionFound.length > 0) {
@@ -111,10 +108,8 @@ const updateQuestion = (req, res) => __awaiter(void 0, void 0, void 0, function*
                     tagName: req.body.tagName,
                     userID: req.body.userID,
                     is_deleted: req.body.is_deleted,
-                    // created_at: new Date().toISOString(),
-                    // updated_at: new Date().toISOString(),
                 };
-                const questionUpdated = yield dbConnection_1.default.exec('InsertOrUpdateQuestion', question);
+                const questionUpdated = yield dbConnection_1.default.exec('updateQuestion', { questionID: question.questionID, title: question.title, description: question.description, tagName: question.tagName, userID: question.userID, is_deleted: '0' });
                 if (questionUpdated) {
                     res.status(200).json({ message: 'Question updated successfully', questionUpdated });
                 }
@@ -133,7 +128,7 @@ const updateQuestion = (req, res) => __awaiter(void 0, void 0, void 0, function*
 });
 exports.updateQuestion = updateQuestion;
 //get Question Vote Count
-const getQuestionByVoteCount = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+const getQuestionVoteCount = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const questionID = req.params.questionID;
         if (!questionID) {
@@ -152,7 +147,7 @@ const getQuestionByVoteCount = (req, res) => __awaiter(void 0, void 0, void 0, f
         res.status(500).json(error);
     }
 });
-exports.getQuestionByVoteCount = getQuestionByVoteCount;
+exports.getQuestionVoteCount = getQuestionVoteCount;
 //delete Question
 const deleteQuestion = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
@@ -164,7 +159,7 @@ const deleteQuestion = (req, res) => __awaiter(void 0, void 0, void 0, function*
                 res.status(200).json({ message: 'Question deleted successfully' });
             }
             else {
-                res.status(500).json({ message: 'Question not found' });
+                res.status(404).json({ message: 'Question not found' });
             }
         }
         else {
