@@ -47,6 +47,7 @@ input {
 }
 
 .questionContent {
+  width: 800px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -110,9 +111,8 @@ h4 {
 
 .viewComment {
   display: flex;
-  gap: 20px;
-  width: 100%;
-  justify-content: center;
+  align-items: center;
+  gap: 10rem;
 }
 
 button {

@@ -52,7 +52,7 @@ export const questionReducer = createReducer(
     ...state,
     isLoading: false,
     questions: state.questions.map((q) =>
-      q.id === question.id ? question : q
+      q.questionID === question.questionID ? question : q
     )
   })),
   on(QuestionActions.updateQuestionFailure, (state, { error }) => ({
@@ -67,7 +67,7 @@ export const questionReducer = createReducer(
   on(QuestionActions.deleteQuestionSuccess, (state, { id }) => ({
     ...state,
     isLoading: false,
-    questions: state.questions.filter((q) => q.id !== `${id}`)
+    questions: state.questions.filter((q) => q.questionID !== `${id}`)
   })),
   on(QuestionActions.deleteQuestionFailure, (state, { error }) => ({
     ...state,

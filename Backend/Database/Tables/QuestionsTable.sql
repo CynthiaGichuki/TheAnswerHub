@@ -4,12 +4,11 @@ CREATE TABLE Questions(
     description VARCHAR(255) NOT NULL,
     tagName VARCHAR(255) NOT NULL,
     userID VARCHAR(255) NOT NULL,
-    FOREIGN KEY (userID) REFERENCES Users(userID),
+    FOREIGN KEY (userID) REFERENCES Users(userID) ON DELETE CASCADE,
     is_deleted BIT NOT NULL DEFAULT 0,
     created_at DATETIME NOT NULL DEFAULT GETDATE(),
     updated_at DATETIME,
     CHECK (created_at <= GETDATE()),
     CHECK (title <> ''),
     CHECK (description <> ''),
-    CONSTRAINT FK_QuestionUser FOREIGN KEY (userID) REFERENCES Users(userID) ON DELETE CASCADE
 );

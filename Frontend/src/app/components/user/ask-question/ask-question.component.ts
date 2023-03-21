@@ -6,6 +6,8 @@ import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { Store } from '@ngrx/store';
 import { addQuestion } from '../../../state/Actions/question.action';
 import { AppState } from '../../../state/app.state';
+import { QuestionService } from 'src/app/services/Question/question.service';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -18,7 +20,7 @@ import { AppState } from '../../../state/app.state';
 export class AskQuestionComponent implements OnInit {
   form!: FormGroup
 
-  constructor(private store: Store<AppState>) { }
+  constructor(private store: Store<AppState>, private questionService: QuestionService, private router: Router) { }
 
   ngOnInit(): void {
     this.form = new FormGroup({
@@ -30,11 +32,20 @@ export class AskQuestionComponent implements OnInit {
   }
 
   submitData(): void {
-    const question = {
-      ...this.form.value,
-      createdDate: new Date(),
-    };
-    this.store.dispatch(addQuestion({ question }));
-    this.form.reset();
+    // const question = {
+    //   ...this.form.value,
+    //   createdDate: new Date(),
+    // };
+    // this.store.dispatch(addQuestion({ question }));
+    // console.log(question);
+
+    this.questionService.addQuestion(this.form.value).subscribe(response => {
+
+      console.log(response);
+      this.router.navigate(['']);
+
+    })
+
+    // this.form.reset();
   }
 }

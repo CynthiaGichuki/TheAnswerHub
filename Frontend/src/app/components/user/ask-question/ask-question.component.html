@@ -30,7 +30,7 @@
                 Choose a Valid Tag Option</span>
         </div>
         <div>
-            <button class="postQuestion" [disabled]="form.invalid" >POST QUESTION</button>
+            <button type="submit" class="postQuestion" [ngClass]="{invalid:!form.valid, valid:form.valid}" >POST QUESTION</button>
         </div>
     </form>
 

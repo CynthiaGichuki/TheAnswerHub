@@ -37,29 +37,31 @@
     <h4>ANSWERS</h4>
     <div class="answer">
         <div class="votes">
-            <img class="votesIcons" src="../../../../assets/icons/thumb-up.png" title="Upvote this answer">
+            <img class="votesIcons" src="../../../../assets/icons/thumb-up.png" title="Upvote this Question">
             <p>50</p>
-            <img class="votesIcons" src="../../../../assets/icons/thumb-down.png" title="Downvote this answer">
+            <img class="votesIcons" src="../../../../assets/icons/thumb-down.png" title="Downvote this Question">
         </div>
         <div class="answerContent">
+           
             <div class="description">
-
                 git reset is the command responsible for the undo. It will undo your last commit while leaving your
                 working tree (the state of your files on disk) untouched. You'll need to add them again before you can
-                commit them again).
-
+                commit them again.
             </div>
             <div class="viewComment">
-                <button routerLink="/question" (click)="viewComment()">VIEW COMMENTS</button>
-                <button routerLink="/question">COMMENT</button>
-            </div>
-            <div class="comments">
-                <!-- <p>Comment 1</p>
-                <p>Comment 2</p> -->
+                <details>
+                    <summary class="summary"><b>View Comments</b></summary>
+                    <p>This is the first comment here.</p>
+                    <p>This is the second comment here.</p>
+                    <p>This is the third comment here.</p>
+                    <p>This is the fourth comment here.</p>
+                </details>
 
+                <button routerLink="/viewquestion">COMMENT</button>
             </div>
         </div>
     </div>
+
     <div class="answer">
         <div class="votes">
             <img class="votesIcons" src="../../../../assets/icons/thumb-up.png" title="Upvote this answer">
@@ -71,18 +73,20 @@
 
                 git reset is the command responsible for the undo. It will undo your last commit while leaving your
                 working tree (the state of your files on disk) untouched. You'll need to add them again before you can
-                commit them again).
+                commit them again.
 
             </div>
             <div class="viewComment">
-                <button routerLink="/question">VIEW COMMENTS</button>
+                <details>
+                    <summary class="summary"><b>View Comments</b></summary>
+                    <p>This is the first comment here.</p>
+                    <p>This is the second comment here.</p>
+                    <p>This is the third comment here.</p>
+                    <p>This is the fourth comment here.</p>
+                </details>
                 <button routerLink="/question">COMMENT</button>
             </div>
-            <div class="comments">
-                <!-- <p>Comment 1</p>
-                <p>Comment 2</p> -->
-
-            </div>
+           
         </div>
     </div>
 

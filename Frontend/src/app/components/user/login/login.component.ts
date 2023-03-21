@@ -2,9 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
-import { UsersService } from 'src/app/services/users.service';
+import { UsersService } from 'src/app/services/Users/users.service';
 import { logUser } from 'src/app/interfaces/interfaces';
-import { AuthService } from 'src/app/services/auth.service';
+import { AuthService } from 'src/app/services/Auth/auth.service';
 import { HeaderComponent } from '../header/header.component';
 
 @Component({
@@ -31,17 +31,26 @@ export class LoginComponent implements OnInit {
 
 
   submitData(): void {
-    console.log(this.form)
-    this.userService.login(this.form.value)
-      .subscribe(
-        user => {
-          localStorage.setItem('currentUser', JSON.stringify(user));
-          this.router.navigate(['']);
-        },
-        error => {
-          this.error = error;
-        }
-      );
+
+    this.userService.login(this.form.value).subscribe(response =>{
+      console.log(response);
+      this.auth.setis_admin(response.is_admin)
+      this.auth.setfullname(response.fullname)
+      this.auth.login()
+      localStorage.setItem('token', response.token)
+      
+    })
+    // console.log(this.form)
+    // this.userService.login(this.form.value)
+    //   .subscribe(
+    //     user => {
+    //       localStorage.setItem('currentUser', JSON.stringify(user));
+    //       this.router.navigate(['']);
+    //     },
+    //     error => {
+    //       this.error = error;
+    //     }
+    //   );
   }
 
 }

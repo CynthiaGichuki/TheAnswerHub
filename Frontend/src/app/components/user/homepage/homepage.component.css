@@ -144,7 +144,7 @@ h3 {
     text-align: center;
 }
 
-h5:hover {
+.summary:hover {
     color: rgba(110, 110, 238, 255);
 
 }

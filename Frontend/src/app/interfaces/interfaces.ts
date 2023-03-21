@@ -9,11 +9,28 @@ export interface logUser {
     email: string
     password: string
 }
+
+export interface registerSuccess {
+    fullname: string
+    registermessage: string
+    token: string
+}
+
+export interface loginSuccess {
+    message: string
+    token: string
+    is_admin: string
+    fullname: string
+}
+export interface Message {
+    message: string
+}
+
 export interface Question {
-    id: string;
+    questionID: string;
     title: string;
     description: string;
-    tags: string[];
+    tagName: string;
     date: Date;
     userId: string;
 }
