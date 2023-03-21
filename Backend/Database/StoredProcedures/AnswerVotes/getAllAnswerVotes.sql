@@ -1,4 +1,4 @@
-CREATE PROCEDURE getAllAnswerVotes
-AS BEGIN
-SELECT * FROM answerVotes;
+CREATE PROCEDURE getAllAnswerVotes AS BEGIN
+SELECT *
+FROM answerVotes;
 END;

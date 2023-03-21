@@ -8,7 +8,7 @@ userRouter.get('', getAllUsers);
 userRouter.get("/:userID", getUserById);
 userRouter.post("/login", loginUser);
 userRouter.post("/register", createUser);
-userRouter.put("/:userID", updateUser);
+userRouter.put("/editProfile/:userID", updateUser);
 userRouter.delete("/:userID", deleteUser);
 
 

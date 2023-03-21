@@ -38,7 +38,7 @@ export const createUser = async (req: ExtendedRequest, res: Response) => {
         }
 
         if (db.checkConnection() as unknown as boolean) {
-            const userCreated = await db.exec('InsertOrUpdateUser', { userID: user.userID, fullname: user.fullname, email: user.email, username: user.username, password: user.password, is_admin: '0', is_deleted: '0', is_sent: '0' });
+            const userCreated = await db.exec('addUser', { userID: user.userID, fullname: user.fullname, email: user.email, username: user.username, password: user.password, is_admin: '0', is_deleted: '0', is_sent: '0' });
 
             if (userCreated) {
                 const token = jwt.sign(user, process.env.JWT_SECRET as string, { expiresIn: '1d' });
@@ -49,7 +49,7 @@ export const createUser = async (req: ExtendedRequest, res: Response) => {
                 res.status(500).json({ message: 'Error creating user' });
             }
         } else {
-            console.log("test")
+            // console.log("test")
             res.status(500).json({ message: 'Error connecting to database' });
         }
 
@@ -91,7 +91,7 @@ export const loginUser = async (req: ExtendedRequest, res: Response) => {
 }
 
 
-// get a user
+// get a user by ID
 
 export const getUserById = async (req: ExtendedRequest, res: Response) => {
     try {
@@ -105,7 +105,7 @@ export const getUserById = async (req: ExtendedRequest, res: Response) => {
             const user: UserModel[] = await db.exec('getUserById', { userID: id }) as unknown as UserModel[]
             console.log(user);
 
-            if (user) {
+            if (user && user.length > 0) {
                 res.status(200).json(user[0])
             } else {
                 res.status(404).json({ message: 'User Not found' })
@@ -125,9 +125,6 @@ export const updateUser = async (req: Request, res: Response) => {
     try {
         const userID = req.params.userID;
         // get user from database
-        console.log("body", req.body);
-
-
         if (db.checkConnection() as unknown as boolean) {
             const userFound: UserModel[] = await db.exec('getUserById', { userID: userID });
             if (userFound.length > 0) {
@@ -137,13 +134,13 @@ export const updateUser = async (req: Request, res: Response) => {
                     email: req.body.email,
                     username: req.body.username,
                     password: req.body.password,
-                    is_admin: req.body.is_admin,
-                    is_deleted: req.body.is_deleted,
-                    is_sent: req.body.is_sent
+                    is_admin: req.body.is_admin = '0',
+                    is_deleted: req.body.is_deleted = '0',
+                    is_sent: req.body.is_sent = '0'
                 }
 
-                const userUpdated = await db.exec('InsertOrUpdateUser', user);
-                if (userUpdated) {
+                const userUpdated = await db.exec('updateUser', user);
+                if (userUpdated && userUpdated.length > 0) {
                     res.status(200).json({ message: 'User updated successfully', userUpdated });
                 }
             } else {

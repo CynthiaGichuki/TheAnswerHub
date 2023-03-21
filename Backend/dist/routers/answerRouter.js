@@ -5,6 +5,7 @@ const answerController_1 = require("../controllers/answerController");
 const answerRouter = (0, express_1.Router)();
 answerRouter.get('', answerController_1.getAllAnswers);
 answerRouter.post("/addAnswer", answerController_1.addAnswer);
+answerRouter.put("/updateAnswer/:answerID", answerController_1.updateAnswer);
 answerRouter.get("/:answerID", answerController_1.getAnswerById);
 answerRouter.get("/voteCount/:answerID", answerController_1.getAnswerVoteCount);
 answerRouter.delete("/:answerID", answerController_1.deleteAnswer);

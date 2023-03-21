@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { v4 as uuidv4 } from 'uuid';
+import { v4 as uuid } from 'uuid';
 import db from '../databaseHelpers/dbConnection';
 import commentModel from '../Models/commentModel';
 
@@ -19,11 +19,9 @@ export const addComment = async (req: Request, res: Response) => {
     try {
         const { commentDescription, userID, answerID } = req.body;
 
-
-        const commentID = uuidv4() as string;
-
+        const commentID = uuid() as string;
         if (db.checkConnection() as unknown as boolean) {
-            const commentCreated = await db.exec('InsertOrUpdateComment', {
+            const commentCreated = await db.exec('addComment', {
                 commentID,
                 commentDescription,
                 userID,
@@ -31,7 +29,7 @@ export const addComment = async (req: Request, res: Response) => {
             });
 
             if (commentCreated) {
-                res.status(200).json({ message: 'Comment created successfully' });
+                res.status(201).json({ message: 'Comment created successfully', commentCreated });
             } else {
                 res.status(500).json({ message: 'Error creating comment' });
             }
@@ -43,12 +41,41 @@ export const addComment = async (req: Request, res: Response) => {
         res.status(500).json(error);
     }
 };
+//update a comment
+export const updateComment = async (req: Request, res: Response) => {
+    try {
+        const commentID = req.params.commentID;
+
+        if (db.checkConnection() as unknown as boolean) {
+            const commentFound: commentModel[] = await db.exec('getCommentById', { commentID: commentID });
+            if (commentFound.length > 0) {
+                const comment = {
+                    commentID: commentFound[0].commentID,
+                    commentDescription: req.body.commentDescription,
+                    userID: req.body.userID,
+                    answerID: req.body.answerID
+                }
+
+                const commentUpdated = await db.exec('updateComment', { commentID: comment.commentID, commentDescription: comment.commentDescription, userID: comment.userID, answerID: comment.answerID });
+                if (commentUpdated) {
+                    res.status(201).json({ message: 'Comment updated successfully', commentUpdated });
+                }
+            } else {
+                res.status(404).json({ message: 'Comment not found' });
+            }
+        } else {
+            res.status(500).json({ message: 'Error connecting to database' });
+        }
+    } catch (error) {
+        res.status(500).json(error);
+    }
+}
+
 
 // get comment by ID
 export const getCommentById = async (req: ExtendedRequest, res: Response) => {
     try {
         const commentID = req.params.commentID;
-
 
         if (!commentID) {
             return res.status(400).json({ message: 'Comment ID not provided' });
@@ -73,21 +100,21 @@ export const getCommentById = async (req: ExtendedRequest, res: Response) => {
 // get all comments
 export const getAllComments = async (req: Request, res: Response) => {
     try {
-      if (db.checkConnection() as unknown as boolean) {
-        const comments: commentModel[] = await db.exec('getAllComments');
-  
-        if (comments.length > 0) {
-          res.status(200).json(comments);
+        if (db.checkConnection() as unknown as boolean) {
+            const comments: commentModel[] = await db.exec('getAllComments');
+
+            if (comments.length > 0) {
+                res.status(200).json(comments);
+            } else {
+                res.status(200).json({ message: 'No comments found' });
+            }
         } else {
-          res.status(200).json({ message: 'No comments found' });
+            res.status(500).json({ message: 'Error connecting to database' });
         }
-      } else {
-        res.status(500).json({ message: 'Error connecting to database' });
-      }
     } catch (error) {
-      res.status(500).json(error);
+        res.status(500).json(error);
     }
-  }
+}
 // delete comment
 export const deleteComment = async (req: ExtendedRequest, res: Response) => {
     try {

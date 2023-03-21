@@ -8,6 +8,6 @@ userRouter.get('', userController_1.getAllUsers);
 userRouter.get("/:userID", userController_1.getUserById);
 userRouter.post("/login", userController_1.loginUser);
 userRouter.post("/register", userController_1.createUser);
-userRouter.put("/:userID", userController_1.updateUser);
+userRouter.put("/editProfile/:userID", userController_1.updateUser);
 userRouter.delete("/:userID", userController_1.deleteUser);
 exports.default = userRouter;

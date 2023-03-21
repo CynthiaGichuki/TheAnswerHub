@@ -3,3 +3,5 @@
 http://localhost:4003/users
 
 ### 2. Get User by ID
+
+http://localhost:4003/users/:userID
