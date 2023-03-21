@@ -1,19 +1,16 @@
 import nodemailer from 'nodemailer'
-import Emailconfig from '../config/emailConfig'
-
+import emailConfig from '../config/emailConfig'
 
 function createTransporter(config: any) {
     return nodemailer.createTransport(config)
 }
 
-
 const sendMail = async (messageOptions: any) => {
-    let transporter = createTransporter(Emailconfig)
+    let transporter = createTransporter(emailConfig)
     await transporter.verify()
-    await transporter.sendMail(messageOptions, (err, info) => {
+    await transporter.sendMail(messageOptions, (error, info) => {
         console.log(info);
 
     })
 }
-
 export default sendMail

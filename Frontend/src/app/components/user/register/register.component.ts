@@ -3,8 +3,9 @@ import { CommonModule } from '@angular/common';
 import { User } from 'src/app/interfaces/interfaces';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
-import { UsersService } from 'src/app/services/users.service';
+import { UsersService } from 'src/app/services/Users/users.service';
 import { HeaderComponent } from '../header/header.component';
+import { AuthService } from 'src/app/services/Auth/auth.service';
 
 @Component({
   selector: 'app-register',
@@ -14,11 +15,11 @@ import { HeaderComponent } from '../header/header.component';
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit {
-  user: User = { userId:'',fullname: '', email: '', username: '', password: '' };
+  user: User = { userId: '', fullname: '', email: '', username: '', password: '' };
   // error = '';
   form!: FormGroup
 
-  constructor(private router: Router, private userService: UsersService) { }
+  constructor(private router: Router, private userService: UsersService, private auth: AuthService) { }
 
   ngOnInit(): void {
     this.form = new FormGroup({
@@ -31,12 +32,14 @@ export class RegisterComponent implements OnInit {
   }
 
   submitData(): void {
-    console.log(this.form.value);
-
+    // console.log(this.form.value);
     this.userService.register(this.form.value).subscribe(response => {
 
       console.log(response);
-      this.router.navigate(['']);
+      this.auth.setfullname(response.fullname)
+      this.auth.register()
+      localStorage.setItem('token', response.token)
+    
     })
   }
 

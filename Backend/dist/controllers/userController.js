@@ -38,7 +38,7 @@ const createUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
             if (userCreated) {
                 const token = jsonwebtoken_1.default.sign(user, process.env.JWT_SECRET, { expiresIn: '1d' });
                 console.log(token);
-                res.status(200).json({ token });
+                res.status(200).json({ message: 'User Registered Successfully', token, fullname });
             }
             else {
                 res.status(500).json({ message: 'Error creating user' });
@@ -58,14 +58,14 @@ exports.createUser = createUser;
 // login a user
 const loginUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const { email, password } = req.body;
+        const { email, password, is_admin } = req.body;
         if (dbConnection_1.default.checkConnection()) {
             const user = yield dbConnection_1.default.exec('getUserbyEmail', { email: email });
             if (user.length > 0) {
                 const validPassword = yield bcrypt_1.default.compare(password, user[0].password);
                 if (validPassword) {
                     const token = jsonwebtoken_1.default.sign(user[0], process.env.JWT_SECRET, { expiresIn: '1d' });
-                    res.status(200).json({ "token": token, user: user[0] });
+                    res.status(200).json({ message: 'User Logged in Successfully', "token": token, is_admin: user[0].is_admin, fullname: user[0].fullname });
                 }
                 else {
                     res.status(500).json({ message: 'Invalid password' });

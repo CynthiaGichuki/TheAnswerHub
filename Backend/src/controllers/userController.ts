@@ -14,6 +14,7 @@ interface ExtendedRequest extends Request {
         email: string;
         username: string;
         password: string;
+        is_admin: string
     },
     params: {
         userID: string;
@@ -44,7 +45,7 @@ export const createUser = async (req: ExtendedRequest, res: Response) => {
                 const token = jwt.sign(user, process.env.JWT_SECRET as string, { expiresIn: '1d' });
                 console.log(token);
 
-                res.status(200).json({ token });
+                res.status(200).json({ message: 'User Registered Successfully', token, fullname });
             } else {
                 res.status(500).json({ message: 'Error creating user' });
             }
@@ -65,7 +66,7 @@ export const createUser = async (req: ExtendedRequest, res: Response) => {
 
 export const loginUser = async (req: ExtendedRequest, res: Response) => {
     try {
-        const { email, password } = req.body;
+        const { email, password, is_admin } = req.body;
         if (db.checkConnection() as unknown as boolean) {
             const user = await db.exec('getUserbyEmail', { email: email });
             if (user.length > 0) {
@@ -75,7 +76,7 @@ export const loginUser = async (req: ExtendedRequest, res: Response) => {
 
                     const token = jwt.sign(user[0], process.env.JWT_SECRET as string, { expiresIn: '1d' });
 
-                    res.status(200).json({ "token": token, user: user[0] });
+                    res.status(200).json({ message: 'User Logged in Successfully', "token": token, is_admin: user[0].is_admin, fullname: user[0].fullname });
                 } else {
                     res.status(500).json({ message: 'Invalid password' });
                 }

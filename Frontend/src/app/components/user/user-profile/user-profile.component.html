@@ -95,8 +95,8 @@
                 <div *ngFor="let question of userQuestions$ | async">
                     <h2>{{ question.title }}</h2>
                     <p>{{ question.description }}</p>
-                    <p>Tags: {{ question.tags }}</p>
-                    <button (click)="onDeleteQuestion(question.id)">Delete</button>
+                    <p>Tags: {{ question.tagName }}</p>
+                    <button (click)="onDeleteQuestion(question.questionID)">Delete</button>
                     <button (click)="onUpdateQuestion(question)">Edit</button>
                 </div>
 
