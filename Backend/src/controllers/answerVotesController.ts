@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 import { v4 as uuid } from 'uuid';
 import db from '../databaseHelpers/dbConnection';
+import { validateAnswerVotes } from '../helpers/answerVotesValidate';
 import answerVotesModel from '../Models/answerVotesModel';
 
 
@@ -27,6 +28,9 @@ export const InsertOrUpdateAnswerVote = async (req: Request, res: Response) => {
             answerID: answerID as string,
             vote_type: vote_type as string
         };
+
+        const { error } = validateAnswerVotes(vote)
+        if (error) return res.status(400).send(error.details[0].message)
 
         if (!vote.userID || !vote.answerID || !vote.vote_type) {
             return res.status(400).json({ message: 'Missing parameters' });

@@ -13,6 +13,8 @@ interface ExtendedRequest extends Request {
         description: string;
         tagName: string;
         userID: string;
+        is_deleted : string;
+        created_at :string
     },
     params: {
         questionID: string;
@@ -28,11 +30,15 @@ export const addQuestion = async (req: ExtendedRequest, res: Response) => {
             title: req.body.title as string,
             description: req.body.description as string,
             tagName: req.body.tagName as string,
-            userID: req.body.userID as string
+            userID: req.body.userID as string,
+            is_deleted: req.body.is_deleted as string,
+            created_at: new Date().toISOString(),
+            updated_at: new Date().toISOString(),
+
         }
 
-        // const { error } = validateQuestion(question)
-        // if (error) return res.status(400).send(error.details[0].message)
+        const { error } = validateQuestion(question)
+        if (error) return res.status(400).send(error.details[0].message)
 
         if (db.checkConnection() as unknown as boolean) {
             const savedQuestion = await db.exec("createQuestion", { questionID: question.questionID, title: question.title, description: question.description, tagName: question.tagName, userID: question.userID, is_deleted: '0' })

@@ -17,6 +17,7 @@ const uuid_1 = require("uuid");
 const dotenv_1 = __importDefault(require("dotenv"));
 const path_1 = __importDefault(require("path"));
 const dbConnection_1 = __importDefault(require("../databaseHelpers/dbConnection"));
+const answerValidate_1 = require("../helpers/answerValidate");
 dotenv_1.default.config({ path: path_1.default.resolve(__dirname, '../../.env') });
 //create a new answer
 const addAnswer = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
@@ -25,10 +26,12 @@ const addAnswer = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
             answerID: (0, uuid_1.v4)(),
             answerDescription: req.body.answerDescription,
             questionID: req.body.questionID,
-            userID: req.body.userID
+            userID: req.body.userID,
+            created_at: new Date().toISOString(),
         };
-        // const { error } = validateQuestion(question)
-        // if (error) return res.status(400).send(error.details[0].message)
+        const { error } = (0, answerValidate_1.validateAnswer)(answer);
+        if (error)
+            return res.status(400).send(error.details[0].message);
         if (dbConnection_1.default.checkConnection()) {
             const answerCreated = yield dbConnection_1.default.exec("addAnswer", { answerID: answer.answerID, answerDescription: answer.answerDescription, questionID: answer.questionID, userID: answer.userID });
             // console.log(answerCreated);

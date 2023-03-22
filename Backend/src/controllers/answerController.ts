@@ -4,6 +4,7 @@ import dotenv from 'dotenv';
 import path from 'path';
 import db from '../databaseHelpers/dbConnection';
 import answerModel from '../Models/answerModel';
+import { validateAnswer } from '../helpers/answerValidate';
 dotenv.config({ path: path.resolve(__dirname, '../../.env') })
 
 interface ExtendedRequest extends Request {
@@ -11,6 +12,7 @@ interface ExtendedRequest extends Request {
     answerDescription: string;
     questionID: string;
     userID: string;
+    created_at: string;
 
   },
   params: {
@@ -26,11 +28,12 @@ export const addAnswer = async (req: ExtendedRequest, res: Response) => {
       answerID: uuid() as string,
       answerDescription: req.body.answerDescription as string,
       questionID: req.body.questionID as string,
-      userID: req.body.userID as string
+      userID: req.body.userID as string,
+      created_at: new Date().toISOString(),
     }
 
-    // const { error } = validateQuestion(question)
-    // if (error) return res.status(400).send(error.details[0].message)
+    const { error } = validateAnswer(answer)
+    if (error) return res.status(400).send(error.details[0].message)
 
     if (db.checkConnection() as unknown as boolean) {
       const answerCreated = await db.exec("addAnswer", { answerID: answer.answerID, answerDescription: answer.answerDescription, questionID: answer.questionID, userID: answer.userID })

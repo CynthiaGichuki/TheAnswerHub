@@ -12,7 +12,7 @@ const questionSchema = joi.object({
     is_deleted: joi.string().required(),
     created_at: joi.string().required(),
     updated_at: joi.string().required(),
-    
+
 });
 
 export const validateQuestion = (question: questionModel) => {

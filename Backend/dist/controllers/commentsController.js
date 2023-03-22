@@ -15,20 +15,26 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.deleteComment = exports.getAllComments = exports.getCommentById = exports.updateComment = exports.addComment = void 0;
 const uuid_1 = require("uuid");
 const dbConnection_1 = __importDefault(require("../databaseHelpers/dbConnection"));
+const commentValidate_1 = require("../helpers/commentValidate");
 // create a new comment
 const addComment = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const { commentDescription, userID, answerID } = req.body;
-        const commentID = (0, uuid_1.v4)();
+        const comment = {
+            commentID: (0, uuid_1.v4)(),
+            commentDescription: req.body.answerDescription,
+            userID: req.body.userID,
+            answerID: req.body.answerID,
+            created_at: new Date().toISOString(),
+        };
+        const { error } = (0, commentValidate_1.validateComment)(comment);
+        if (error)
+            return res.status(400).send(error.details[0].message);
         if (dbConnection_1.default.checkConnection()) {
             const commentCreated = yield dbConnection_1.default.exec('addComment', {
-                commentID,
-                commentDescription,
-                userID,
-                answerID,
+                commentID: comment.commentID, commentDescription: comment.commentDescription, userID: comment.userID, answerID: comment.answerID,
             });
-            if (commentCreated) {
-                res.status(201).json({ message: 'Comment created successfully', commentCreated });
+            if (comment) {
+                res.status(201).json({ message: 'Comment created successfully', comment });
             }
             else {
                 res.status(500).json({ message: 'Error creating comment' });

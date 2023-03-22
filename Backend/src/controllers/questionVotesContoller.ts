@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 import { v4 as uuidv4 } from 'uuid';
 import db from '../databaseHelpers/dbConnection';
+import { validateQuestionVotes } from '../helpers/questionVotesValidate';
 import questionVotesModel from '../Models/questionVotesModel';
 
 interface ExtendedRequest extends Request {
@@ -9,7 +10,7 @@ interface ExtendedRequest extends Request {
         questionID: string;
         vote_type: string;
     },
-    
+
     params: {
         voteID: string;
     }
@@ -25,6 +26,9 @@ export const InsertOrUpdateQuestionVote = async (req: Request, res: Response) =>
             questionID: questionID as string,
             vote_type: vote_type as string
         };
+
+        const { error } = validateQuestionVotes(vote)
+        if (error) return res.status(400).send(error.details[0].message)
 
         if (!vote.userID || !vote.questionID || !vote.vote_type) {
             return res.status(400).json({ message: 'Missing parameters' });

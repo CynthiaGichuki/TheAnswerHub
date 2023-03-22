@@ -1,7 +1,9 @@
 import { Request, Response } from 'express';
 import { v4 as uuid } from 'uuid';
 import db from '../databaseHelpers/dbConnection';
+import { validateComment } from '../helpers/commentValidate';
 import commentModel from '../Models/commentModel';
+
 
 interface ExtendedRequest extends Request {
     body: {
@@ -17,19 +19,26 @@ interface ExtendedRequest extends Request {
 // create a new comment
 export const addComment = async (req: Request, res: Response) => {
     try {
-        const { commentDescription, userID, answerID } = req.body;
+        const comment = {
+            commentID: uuid() as string,
+            commentDescription: req.body.answerDescription as string,
+            userID: req.body.userID as string,
+            answerID: req.body.answerID as string,
+            created_at: new Date().toISOString(),
+        }
 
-        const commentID = uuid() as string;
+        const { error } = validateComment(comment)
+        if (error) return res.status(400).send(error.details[0].message)
+
+
         if (db.checkConnection() as unknown as boolean) {
             const commentCreated = await db.exec('addComment', {
-                commentID,
-                commentDescription,
-                userID,
-                answerID,
+                commentID: comment.commentID, commentDescription: comment.commentDescription, userID: comment.userID, answerID: comment.answerID,
             });
 
-            if (commentCreated) {
-                res.status(201).json({ message: 'Comment created successfully', commentCreated });
+
+            if (comment) {
+                res.status(201).json({ message: 'Comment created successfully', comment });
             } else {
                 res.status(500).json({ message: 'Error creating comment' });
             }
@@ -55,6 +64,7 @@ export const updateComment = async (req: Request, res: Response) => {
                     userID: req.body.userID,
                     answerID: req.body.answerID
                 }
+
 
                 const commentUpdated = await db.exec('updateComment', { commentID: comment.commentID, commentDescription: comment.commentDescription, userID: comment.userID, answerID: comment.answerID });
                 if (commentUpdated) {
