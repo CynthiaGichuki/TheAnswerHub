@@ -15,6 +15,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.getAllQuesitonVotes = exports.getQuestionVoteByID = exports.InsertOrUpdateQuestionVote = void 0;
 const uuid_1 = require("uuid");
 const dbConnection_1 = __importDefault(require("../databaseHelpers/dbConnection"));
+const questionVotesValidate_1 = require("../helpers/questionVotesValidate");
 //add question vote
 const InsertOrUpdateQuestionVote = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
@@ -25,6 +26,9 @@ const InsertOrUpdateQuestionVote = (req, res) => __awaiter(void 0, void 0, void 
             questionID: questionID,
             vote_type: vote_type
         };
+        const { error } = (0, questionVotesValidate_1.validateQuestionVotes)(vote);
+        if (error)
+            return res.status(400).send(error.details[0].message);
         if (!vote.userID || !vote.questionID || !vote.vote_type) {
             return res.status(400).json({ message: 'Missing parameters' });
         }

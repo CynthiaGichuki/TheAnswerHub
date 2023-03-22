@@ -15,6 +15,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.deleteQuestion = exports.getQuestionVoteCount = exports.updateQuestion = exports.getQuestionById = exports.getAllQuestions = exports.addQuestion = void 0;
 const uuid_1 = require("uuid");
 const dbConnection_1 = __importDefault(require("../databaseHelpers/dbConnection"));
+const questionValidate_1 = require("../helpers/questionValidate");
 const dotenv_1 = __importDefault(require("dotenv"));
 const path_1 = __importDefault(require("path"));
 dotenv_1.default.config({ path: path_1.default.resolve(__dirname, '../../.env') });
@@ -26,10 +27,14 @@ const addQuestion = (req, res) => __awaiter(void 0, void 0, void 0, function* ()
             title: req.body.title,
             description: req.body.description,
             tagName: req.body.tagName,
-            userID: req.body.userID
+            userID: req.body.userID,
+            is_deleted: req.body.is_deleted,
+            created_at: new Date().toISOString(),
+            updated_at: new Date().toISOString(),
         };
-        // const { error } = validateQuestion(question)
-        // if (error) return res.status(400).send(error.details[0].message)
+        const { error } = (0, questionValidate_1.validateQuestion)(question);
+        if (error)
+            return res.status(400).send(error.details[0].message);
         if (dbConnection_1.default.checkConnection()) {
             const savedQuestion = yield dbConnection_1.default.exec("createQuestion", { questionID: question.questionID, title: question.title, description: question.description, tagName: question.tagName, userID: question.userID, is_deleted: '0' });
             if (savedQuestion) {
