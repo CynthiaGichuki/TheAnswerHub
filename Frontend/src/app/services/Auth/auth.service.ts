@@ -58,20 +58,25 @@ export class AuthService {
 
   register() {
     this.isRegistered = true
-    // alert(this.registermessage + '. Welcome' + this.fullname + '.')
     alert('Registration is Successful. Welcome ' + this.fullname + '.');
     this.router.navigate(['/login'])
 
   }
 
   login() {
-    this.isLoggedIn = true
-    alert('Log In Successful. Welcome ' + this.fullname + '.');
-    this.router.navigate([''])
-
+    this.isLoggedIn = true;
   }
+
+
   logout() {
     this.isLoggedIn = false
-    this.router.navigate(['/login'])
+    if (this.is_admin) {
+      this.router.navigate(['/login'])
+    }
+    else {
+      this.router.navigate([''])
+    }
+
+
   }
 }

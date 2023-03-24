@@ -9,12 +9,13 @@ dotenv.config({ path: path.resolve(__dirname, '../../.env') })
 
 interface ExtendedRequest extends Request {
     body: {
+        users?: any;
         title: string;
         description: string;
         tagName: string;
         userID: string;
-        is_deleted : string;
-        created_at :string
+        is_deleted: string;
+        created_at: string
     },
     params: {
         questionID: string;
@@ -30,7 +31,8 @@ export const addQuestion = async (req: ExtendedRequest, res: Response) => {
             title: req.body.title as string,
             description: req.body.description as string,
             tagName: req.body.tagName as string,
-            userID: req.body.userID as string,
+            userID: req.body.users.userID as string,
+            // userID: req.body.userID as string,
             is_deleted: req.body.is_deleted as string,
             created_at: new Date().toISOString(),
             updated_at: new Date().toISOString(),
@@ -45,7 +47,7 @@ export const addQuestion = async (req: ExtendedRequest, res: Response) => {
 
             if (savedQuestion) {
 
-                res.status(201).json({ message: "Question Created Successfully" })
+                res.status(201).json({ message: "Question Created Successfully", question })
             } else {
                 res.status(422).send({ message: "Error creating question" })
             }
@@ -105,7 +107,7 @@ export const getQuestionById = async (req: ExtendedRequest, res: Response) => {
 export const updateQuestion = async (req: Request, res: Response) => {
     try {
         const questionID = req.params.questionID;
-      
+
         if (db.checkConnection() as unknown as boolean) {
             const questionFound: questionModel[] = await db.exec('GetQuestionById', { questionID: questionID });
             if (questionFound.length > 0) {

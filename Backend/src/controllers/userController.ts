@@ -76,7 +76,7 @@ export const loginUser = async (req: ExtendedRequest, res: Response) => {
 
                     const token = jwt.sign(user[0], process.env.JWT_SECRET as string, { expiresIn: '1d' });
 
-                    res.status(200).json({ message: 'User Logged in Successfully', "token": token, is_admin: user[0].is_admin, fullname: user[0].fullname });
+                    res.status(200).json({ message: 'User Logged in Successfully', "token": token, 'is_admin': user[0].is_admin, 'fullname': user[0].fullname });
                 } else {
                     res.status(500).json({ message: 'Invalid password' });
                 }

@@ -2,10 +2,11 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = require("express");
 const commentsController_1 = require("../controllers/commentsController");
+const verifyToken_middleware_1 = require("../Middlewares/verifyToken.middleware");
 const commentRouter = (0, express_1.Router)();
-commentRouter.get('', commentsController_1.getAllComments);
-commentRouter.post("/addComment", commentsController_1.addComment);
-commentRouter.put("/updateComment/:commentID", commentsController_1.updateComment);
-commentRouter.get("/:commentID", commentsController_1.getCommentById);
-commentRouter.delete("/:commentID", commentsController_1.deleteComment);
+commentRouter.get('', verifyToken_middleware_1.verifyToken, commentsController_1.getAllComments);
+commentRouter.post("/addComment", verifyToken_middleware_1.verifyToken, commentsController_1.addComment);
+commentRouter.put("/updateComment/:commentID", verifyToken_middleware_1.verifyToken, commentsController_1.updateComment);
+commentRouter.get("/:commentID", verifyToken_middleware_1.verifyToken, commentsController_1.getCommentById);
+commentRouter.delete("/:commentID", verifyToken_middleware_1.verifyToken, commentsController_1.deleteComment);
 exports.default = commentRouter;

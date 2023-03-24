@@ -65,7 +65,7 @@ const loginUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
                 const validPassword = yield bcrypt_1.default.compare(password, user[0].password);
                 if (validPassword) {
                     const token = jsonwebtoken_1.default.sign(user[0], process.env.JWT_SECRET, { expiresIn: '1d' });
-                    res.status(200).json({ message: 'User Logged in Successfully', "token": token, is_admin: user[0].is_admin, fullname: user[0].fullname });
+                    res.status(200).json({ message: 'User Logged in Successfully', "token": token, 'is_admin': user[0].is_admin, 'fullname': user[0].fullname });
                 }
                 else {
                     res.status(500).json({ message: 'Invalid password' });

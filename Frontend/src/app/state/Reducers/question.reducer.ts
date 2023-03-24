@@ -1,3 +1,4 @@
+import { state } from '@angular/animations';
 import { createReducer, on } from '@ngrx/store';
 import { Question } from 'src/app/interfaces/interfaces';
 import * as QuestionActions from '../Actions/question.action';
@@ -55,6 +56,22 @@ export const questionReducer = createReducer(
       q.questionID === question.questionID ? question : q
     )
   })),
+
+  on(QuestionActions.getQuestionVoteCount, (state) => ({
+    ...state,
+    isLoading: true,
+  })),
+
+  on(QuestionActions.getQuestionVoteCountSuccess, (state, { questionID }) => ({
+    ...state,
+    isLoading: false,
+    questions: state.questions.filter((q) => q.questionID !== `${questionID}`)
+  })),
+  on(QuestionActions.getQuestionVoteCountFailure, (state, { error }) => ({
+    ...state,
+    isLoading: false,
+    error
+  })),
   on(QuestionActions.updateQuestionFailure, (state, { error }) => ({
     ...state,
     isLoading: false,
@@ -64,10 +81,11 @@ export const questionReducer = createReducer(
     ...state,
     isLoading: true
   })),
-  on(QuestionActions.deleteQuestionSuccess, (state, { id }) => ({
+
+  on(QuestionActions.deleteQuestionSuccess, (state, { questionID }) => ({
     ...state,
     isLoading: false,
-    questions: state.questions.filter((q) => q.questionID !== `${id}`)
+    questions: state.questions.filter((q) => q.questionID !== `${questionID}`)
   })),
   on(QuestionActions.deleteQuestionFailure, (state, { error }) => ({
     ...state,

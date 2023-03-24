@@ -12,58 +12,55 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getAllQuesitonVotes = exports.getQuestionVoteByID = exports.InsertOrUpdateQuestionVote = void 0;
+exports.getAllQuesitonVotes = exports.getQuestionVoteByID = exports.addQuestionVote = void 0;
 const uuid_1 = require("uuid");
 const dbConnection_1 = __importDefault(require("../databaseHelpers/dbConnection"));
 const questionVotesValidate_1 = require("../helpers/questionVotesValidate");
 //add question vote
-const InsertOrUpdateQuestionVote = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+const addQuestionVote = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const { userID, questionID, vote_type } = req.body;
         const vote = {
             voteID: (0, uuid_1.v4)(),
-            userID: userID,
-            questionID: questionID,
-            vote_type: vote_type
+            userID: req.body.userID,
+            questionID: req.body.questionID,
+            vote_type: req.body.vote_type
         };
         const { error } = (0, questionVotesValidate_1.validateQuestionVotes)(vote);
         if (error)
             return res.status(400).send(error.details[0].message);
-        if (!vote.userID || !vote.questionID || !vote.vote_type) {
-            return res.status(400).json({ message: 'Missing parameters' });
-        }
         if (dbConnection_1.default.checkConnection()) {
-            const existingVote = yield dbConnection_1.default.exec('InsertOrUpdateQuestionVote', { userID: vote.userID, questionID: vote.questionID });
-            if (existingVote.length > 0) {
+            // Check if the user has already voted for this question
+            const existingVote = yield dbConnection_1.default.exec("GetQuestionVote", { userID: vote.userID, questionID: vote.questionID });
+            if (existingVote) {
                 // If the user has already voted, update the existing vote
-                const updatedVote = yield dbConnection_1.default.exec('InsertOrUpdateQuestionVote', { voteID: existingVote[0].voteID, userID: vote.userID, questionID: vote.questionID, voteType: vote.vote_type });
+                const updatedVote = yield dbConnection_1.default.exec("updateQuestionVote", { voteID: vote.voteID, userID: vote.userID, questionID: vote.questionID, vote_type: vote.vote_type });
                 if (updatedVote) {
-                    res.status(200).json({ message: 'Vote updated successfully' });
+                    res.status(200).json({ message: "Question vote updated successfully" });
                 }
                 else {
-                    res.status(500).json({ message: 'Error updating vote' });
+                    res.status(422).send({ message: "Error updating question vote" });
                 }
             }
             else {
                 // If the user has not voted, insert a new vote
-                const newVote = yield dbConnection_1.default.exec('InsertOrUpdateQuestionVote', { voteID: vote.voteID, userID: vote.userID, questionID: vote.questionID, voteType: vote.vote_type });
-                if (newVote) {
-                    res.status(200).json({ message: 'Vote added successfully' });
+                const savedVote = yield dbConnection_1.default.exec("addQuestionVote", { voteID: vote.voteID, userID: vote.userID, questionID: vote.questionID, vote_type: vote.vote_type });
+                if (savedVote) {
+                    res.status(201).json({ message: "Question vote added successfully" });
                 }
                 else {
-                    res.status(500).json({ message: 'Error adding vote' });
+                    res.status(422).send({ message: "Error adding question vote" });
                 }
             }
         }
         else {
-            res.status(500).json({ message: 'Error connecting to database' });
+            res.status(500).send({ message: "Error connecting to database" });
         }
     }
     catch (error) {
-        res.status(500).json(error);
+        res.status(500).send(error);
     }
 });
-exports.InsertOrUpdateQuestionVote = InsertOrUpdateQuestionVote;
+exports.addQuestionVote = addQuestionVote;
 //get question vote by ID
 const getQuestionVoteByID = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {

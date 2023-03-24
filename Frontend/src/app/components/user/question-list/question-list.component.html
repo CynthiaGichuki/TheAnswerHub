@@ -1,5 +1,35 @@
-<div *ngFor="let question of questions$ | async">
-  <h2>{{ question.title }}</h2>
-  <p>{{ question.description }}</p>
-  <p>Tags: {{ question.tagName }}</p>
+<div class="container">
+  <div class="navbar">
+    <app-header></app-header>
+  </div>
+  <div class="content">
+    <div class="question" *ngFor="let question of allQuestions">
+      <div class="votes">
+        <img class="votesIcons" src="../../../../assets/icons/thumb-up.png" title="Upvote this Question">
+        <p>50</p>
+        <img class="votesIcons" src="../../../../assets/icons/thumb-down.png" title="Downvote this Question">
+      </div>
+      <div class="questionContent">
+        <div class="title">
+          <h3> {{ question?.title }}</h3>
+        </div>
+        <div class="description">
+          {{ question?.description }}
+        </div>
+        <div class="viewQuestion">
+          <details>
+            <summary class="summary" (click)="viewAnswers()"><b>10 answers</b></summary>
+            <p>This is the first answer here.</p>
+            <p>This is the second answer here.</p>
+            <p>This is the third answer here.</p>
+            <p>This is the fourth answer here.</p>
+          </details>
+          <button routerLink="/viewquestion" (click)="viewQuestion()">VIEW QUESTION</button>
+          <div class="tag">{{ question?.tagName}}</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
 </div>

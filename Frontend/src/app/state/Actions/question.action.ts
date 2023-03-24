@@ -17,6 +17,25 @@ export const addQuestion = createAction(
   '[Question] Add Question',
   props<{ question: Question }>()
 );
+export const getQuestion = createAction(
+  '[Question] Get Question',
+  props<{ questionID: string }>()
+);
+
+export const getQuestionVoteCount = createAction(
+  '[Question] Get Question Vote Count',
+  props<{ questionID: string }>()
+);
+
+export const getQuestionVoteCountSuccess = createAction(
+  '[Question] Get Question Vote Count',
+  props<{ questionID: string }>()
+);
+
+export const getQuestionVoteCountFailure = createAction(
+  '[Question] Get Question Vote Count Failure',
+  props<{ error: string }>()
+);
 
 export const addQuestionSuccess = createAction(
   '[Question] Add Question Success',
@@ -45,12 +64,12 @@ export const updateQuestionFailure = createAction(
 
 export const deleteQuestion = createAction(
   '[Question] Delete Question',
-  props<{ id: string }>()
+  props<{ questionID: string }>()
 );
 
 export const deleteQuestionSuccess = createAction(
   '[Question] Delete Question Success',
-  props<{ id: string }>()
+  props<{ questionID: string }>()
 );
 
 export const deleteQuestionFailure = createAction(

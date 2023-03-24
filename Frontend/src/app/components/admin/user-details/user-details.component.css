@@ -1,0 +1,59 @@
+* {
+    margin: 0px;
+    padding: 0px;
+}
+
+.container {
+    display: flex;
+    gap: 10px;
+    width: 100%;
+}
+
+.content {
+    width: 80vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+table {
+    width: 70vw;
+    margin: 5em auto;
+    text-align: start;
+    border-spacing: 0;
+}
+
+th {
+    text-align: start;
+    font-size: .8em;
+    padding-bottom: 1.2em;
+}
+
+td {
+    font-size: .7em;
+    padding-bottom: 1em;
+    padding-top: 1.5em;
+    color: rgba(0, 0, 0, 0.5);
+    font-weight: 600;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.5);
+}
+
+.td-btn {
+    /* border-color: red; */
+    padding: 20px;
+}
+
+button {
+    color: white;
+    background-color: rgba(110, 110, 238, 255);
+    padding: 0.5rem;
+    border: transparent;
+    border-radius: 0.5rem;
+    text-align: center;
+}
+
+button:hover {
+    background-color: black;
+
+}

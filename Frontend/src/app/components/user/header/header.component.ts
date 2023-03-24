@@ -1,7 +1,11 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { AuthService } from 'src/app/services/Auth/auth.service';
+import { Store } from '@ngrx/store';
+import { selectLoggedInUser } from 'src/app/state/Selectors/login.selector';
+import { logout } from 'src/app/state/Actions/login.actions';
+
 
 @Component({
   selector: 'app-header',
@@ -11,8 +15,16 @@ import { AuthService } from 'src/app/services/Auth/auth.service';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent {
-  constructor(protected auth: AuthService) {
+  constructor(protected store: Store, private router: Router) {
 
   }
+
+  isLoggedIn$ = this.store.select(selectLoggedInUser);
+
+  logout() {
+    this.store.dispatch(logout());
+    this.router.navigate([''])
+  }
+
 
 }
