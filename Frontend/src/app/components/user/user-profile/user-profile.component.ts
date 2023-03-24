@@ -39,7 +39,7 @@ export class UserProfileComponent {
     this.store.dispatch(updateQuestion({ question }));
   }
 
-  onDeleteQuestion(id: string): void {
-    this.store.dispatch(deleteQuestion({ id }));
+  onDeleteQuestion(questionID: string): void {
+    this.store.dispatch(deleteQuestion({ questionID }));
   }
 }

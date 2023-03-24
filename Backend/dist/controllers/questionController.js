@@ -27,7 +27,8 @@ const addQuestion = (req, res) => __awaiter(void 0, void 0, void 0, function* ()
             title: req.body.title,
             description: req.body.description,
             tagName: req.body.tagName,
-            userID: req.body.userID,
+            userID: req.body.users.userID,
+            // userID: req.body.userID as string,
             is_deleted: req.body.is_deleted,
             created_at: new Date().toISOString(),
             updated_at: new Date().toISOString(),
@@ -38,7 +39,7 @@ const addQuestion = (req, res) => __awaiter(void 0, void 0, void 0, function* ()
         if (dbConnection_1.default.checkConnection()) {
             const savedQuestion = yield dbConnection_1.default.exec("createQuestion", { questionID: question.questionID, title: question.title, description: question.description, tagName: question.tagName, userID: question.userID, is_deleted: '0' });
             if (savedQuestion) {
-                res.status(201).json({ message: "Question Created Successfully" });
+                res.status(201).json({ message: "Question Created Successfully", question });
             }
             else {
                 res.status(422).send({ message: "Error creating question" });

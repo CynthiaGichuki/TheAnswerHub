@@ -29,8 +29,8 @@ export class QuestionEffects {
       ofType(QuestionActions.addQuestion),
       mergeMap(({ question }) =>
         this.questionService.addQuestion(question).pipe(
-          map((addedQuestion) =>
-            QuestionActions.addQuestionSuccess({ question: addedQuestion })
+          map((addQuestionSuccess) =>
+            QuestionActions.addQuestionSuccess({ question: addQuestionSuccess })
           ),
           catchError((error) =>
             of(QuestionActions.addQuestionFailure({ error: error.message }))
@@ -59,10 +59,10 @@ export class QuestionEffects {
   deleteQuestion$ = createEffect(() =>
     this.actions$.pipe(
       ofType(QuestionActions.deleteQuestion),
-      mergeMap(({ id }) =>
-        this.questionService.deleteQuestion(`${id}`).pipe(
+      mergeMap(({ questionID }) =>
+        this.questionService.deleteQuestion(`${questionID}`).pipe(
           map(() =>
-            QuestionActions.deleteQuestionSuccess({ id })
+            QuestionActions.deleteQuestionSuccess({ questionID })
           ),
           catchError((error) =>
             of(QuestionActions.deleteQuestionFailure({ error: error.message }))
@@ -71,6 +71,24 @@ export class QuestionEffects {
       )
     )
   );
+
+  getQuestionVoteCount$ = createEffect(() =>
+  this.actions$.pipe(
+    ofType(QuestionActions.getQuestionVoteCount),
+    mergeMap(({ questionID }) =>
+      this.questionService.getQuestionVoteCount(`${questionID}`).pipe(
+        map(() =>
+          QuestionActions.getQuestionVoteCount({ questionID })
+        ),
+        catchError((error) =>
+          of(QuestionActions.getQuestionVoteCountFailure({ error: error.message }))
+        )
+      )
+    )
+  )
+);
+
+
 
   constructor(
     private actions$: Actions,

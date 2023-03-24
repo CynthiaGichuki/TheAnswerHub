@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Question } from '../../interfaces/interfaces';
+import { Message, Question, questionVoteCount } from '../../interfaces/interfaces';
 
 @Injectable({
   providedIn: 'root'
@@ -21,6 +21,10 @@ export class QuestionService {
 
   addQuestion(question: Question): Observable<Question> {
     return this.http.post<Question>(`http://localhost:4003/questions/addQuestion`, question);
+  }
+
+  getQuestionVoteCount(questionID: string): Observable<questionVoteCount>{
+    return this.http.get<questionVoteCount>(`http://localhost:4003/questions/voteCount/${questionID}`)
   }
 
   // createQuestion(addQuestion: Question): Observable<Question> {

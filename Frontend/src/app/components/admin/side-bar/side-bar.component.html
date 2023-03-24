@@ -1,3 +1,43 @@
-<div>
-    <h3>THE ANSWER HUB</h3>
+<div class="sidebar">
+  <div class="logo">
+    <h4>THE ANSWER HUB</h4>
+  </div>
+  <div class="sidebar-title">
+    <h4> <a routerLink="/admin">ADMIN DASHBOARD</a></h4>
+  </div>
+  <div class="pages">
+
+    <div class="questions sidebar-links">
+      <div>
+        <img src="../../../../assets/icons/question-mark.png" alt="">
+      </div>
+      <div class="links">
+        <h4><a routerLink="/adminquestions">Questions</a></h4>
+      </div>
+    </div>
+
+    <div class="users sidebar-links">
+      <div>
+        <img src="../../../../assets/icons/woman.png" alt="">
+      </div>
+      <div class="links">
+        <h4> <a routerLink="/admin">User</a></h4>
+      </div>
+    </div>
+
+    <div class="analytics sidebar-links">
+      <div class="sidebar-img">
+        <img src="../../../../assets/icons/bar-chart.png" alt="">
+      </div>
+      <div class="links">
+        <h4><a routerLink="/home">Analytics</a></h4>
+      </div>
+    </div>
+
+  </div>
+  <div class="logout">
+    <!-- <button *ngIf="auth.isLoggedIn" (click)="auth.logout()" >LOG OUT</button> -->
+    <button (click)="auth.logout()" >LOG OUT</button>
+  
+  </div>
 </div>

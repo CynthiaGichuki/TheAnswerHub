@@ -4,8 +4,8 @@ import path from 'path'
 dotenv.config({ path: path.resolve(__dirname, '../../.env') })
 
 let emailConfig = {
-  host:'smtp.gmail.com',
-  service:'gmail',
+  host: 'smtp.gmail.com',
+  service: 'gmail',
   port: 587,
   auth: {
     user: process.env.EMAIL,

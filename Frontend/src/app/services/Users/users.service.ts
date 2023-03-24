@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { User, registerSuccess, loginSuccess } from '../../interfaces/interfaces';
+import { User, loggedInUser, registerUserSuccess, Message } from '../../interfaces/interfaces';
 import { Router } from '@angular/router';
 
 
@@ -16,18 +16,21 @@ export class UsersService {
 
   constructor(private http: HttpClient, private router: Router) { }
 
-  register(user: User): Observable<registerSuccess> {
-    return this.http.post<registerSuccess>(`http://localhost:4003/users/register`, user);
+  register(user: User): Observable<registerUserSuccess> {
+    return this.http.post<registerUserSuccess>(`http://localhost:4003/users/register`, user);
   }
 
-  login(loguser: { email: string, password: string }): Observable<loginSuccess> {
-    return this.http.post<loginSuccess>('http://localhost:4003/users/login', loguser);
+  login(loguser: { email: string, password: string }): Observable<loggedInUser> {
+    return this.http.post<loggedInUser>('http://localhost:4003/users/login', loguser);
 
   }
 
   getUsers(): Observable<User[]> {
     return this.http.get<User[]>('http://localhost:4003/users')
+  }
 
+  deleteUser(userID: string): Observable<Message> {
+    return this.http.delete<Message>(`http://localhost:4003/users/${userID}`);
   }
 }
 

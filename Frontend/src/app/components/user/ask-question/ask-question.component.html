@@ -1,7 +1,7 @@
 <app-header></app-header>
 
 <div class="maincontainer">
-    <form [formGroup]="form" (ngSubmit)="submitData()">
+    <form [formGroup]="form" (ngSubmit)="submitData(form)">
         <h4>ASK YOUR QUESTION BELOW:</h4>
         <div class="title">
             <label>Title:</label>
@@ -30,7 +30,8 @@
                 Choose a Valid Tag Option</span>
         </div>
         <div>
-            <button type="submit" class="postQuestion" [ngClass]="{invalid:!form.valid, valid:form.valid}" >POST QUESTION</button>
+            <button type="submit" class="postQuestion" [ngClass]="{invalid:!form.valid, valid:form.valid}">POST
+                QUESTION</button>
         </div>
     </form>
 

@@ -3,4 +3,3 @@ SELECT *
 FROM questionVotes
 WHERE voteID = @voteID
 END
-

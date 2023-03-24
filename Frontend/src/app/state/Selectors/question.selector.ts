@@ -10,6 +10,11 @@ export const selectAllQuestions = createSelector(
   (state) => state.questions
 );
 
+export const selectQuestionById = (questionID: string) => createSelector(
+  selectAllQuestions,
+  (questions) => questions.find((question) => question.questionID === questionID)
+)
+
 export const selectQuestionLoading = createSelector(
   selectQuestionState,
   (state) => state.isLoading

@@ -16,7 +16,7 @@ export const verifyToken = (req: Request, res: Response, next: NextFunction) => 
       if (error) {
         res.sendStatus(403)
       } else {
-        req.body.user = authData
+        req.body.users = authData
         next()
       }
     })

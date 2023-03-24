@@ -4,10 +4,12 @@ import { HeaderComponent } from '../header/header.component';
 import { FooterComponent } from '../footer/footer.component';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
-import { addQuestion } from '../../../state/Actions/question.action';
+import * as QuestionsActions from '../../../state/Actions/question.action';
 import { AppState } from '../../../state/app.state';
 import { QuestionService } from 'src/app/services/Question/question.service';
 import { Router } from '@angular/router';
+import { Question } from 'src/app/interfaces/interfaces';
+import { selectLoggedInUser } from 'src/app/state/Selectors/login.selector';
 
 
 @Component({
@@ -20,32 +22,30 @@ import { Router } from '@angular/router';
 export class AskQuestionComponent implements OnInit {
   form!: FormGroup
 
-  constructor(private store: Store<AppState>, private questionService: QuestionService, private router: Router) { }
-
-  ngOnInit(): void {
+  constructor(private store: Store<AppState>, private questionService: QuestionService, private router: Router) {
     this.form = new FormGroup({
       title: new FormControl(null, [Validators.required]),
       description: new FormControl(null, [Validators.required]),
       tags: new FormControl(null, [Validators.required])
 
     })
+   }
+
+  ngOnInit(): void {
+    const user = this.store.select(selectLoggedInUser).subscribe((user: any) => {
+      console.log(user?.user[0].userId)
+    })
+    
   }
 
-  submitData(): void {
-    // const question = {
-    //   ...this.form.value,
-    //   createdDate: new Date(),
-    // };
-    // this.store.dispatch(addQuestion({ question }));
-    // console.log(question);
 
-    this.questionService.addQuestion(this.form.value).subscribe(response => {
+  submitData(form: FormGroup) {
+    console.log(form.value);
 
-      console.log(response);
-      this.router.navigate(['']);
+    this.store.dispatch(QuestionsActions.addQuestion({
+      ...form.value
+    }));
 
-    })
-
-    // this.form.reset();
+    this.router.navigate(["allQuestions"]);
   }
 }

@@ -4,18 +4,19 @@
     </div>
     <div class="links">
         <a routerLink="">HOME</a>
-        <a *ngIf="auth.isLoggedIn" routerLink="/aboutus">ABOUT US</a>
-        <a *ngIf="auth.isLoggedIn" routerLink="/news">NEWS FEED</a>
-        <a *ngIf="!auth.isLoggedIn" routerLink="/login">LOGIN</a>
-        <a *ngIf="!auth.isLoggedIn" routerLink="/register">REGISTER</a>
+        <a *ngIf="(isLoggedIn$ | async)" routerLink="/aboutus">ABOUT US</a>
+        <a *ngIf="(isLoggedIn$ | async)" routerLink="/allQuestions">VIEW ALL QUESTIONS</a>
+        <a *ngIf="!(isLoggedIn$ | async)" routerLink="/login">LOGIN</a>
+        <a *ngIf="!(isLoggedIn$ | async)" routerLink="/register">REGISTER</a>
 
     </div>
 
     <div class="buttons">
-        <button *ngIf="auth.isLoggedIn" routerLink="/askquestion">ASK A QUESTION</button>
-        <button *ngIf="!auth.isLoggedIn" routerLink="/login">SIGN IN</button>
-        <button *ngIf="auth.isLoggedIn" routerLink="/profile">PROFILE</button>
-        <button *ngIf="auth.isLoggedIn" (click)="auth.logout()" >LOG OUT</button>
+        <button *ngIf="(isLoggedIn$ | async)" routerLink="/askquestion">ASK A QUESTION</button>
+        <button *ngIf="!(isLoggedIn$ | async)" routerLink="/login">SIGN IN</button>
+        <button *ngIf="(isLoggedIn$ | async)" routerLink="/profile">PROFILE</button>
+        <!-- <button *ngIf="(isLoggedIn$ | async)" routerLink="" (click)="logout()">LOG OUT</button> -->
+        <button *ngIf="(isLoggedIn$ | async)" routerLink= "">LOG OUT</button>
     </div>
 
 </div>
