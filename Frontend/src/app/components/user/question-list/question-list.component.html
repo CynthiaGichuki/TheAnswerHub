@@ -1,12 +1,30 @@
 <div class="container">
-  <div class="navbar">
+  <!-- <div class="navbar">
     <app-header></app-header>
+  </div> -->
+  <div class="navbar">
+    <div class="logo">
+      <img class="logo" src="../../../../assets/icons/qa.png">
+    </div>
+    <div class="links">
+      <a routerLink="">HOME</a>
+      <a routerLink="/aboutus">ABOUT US</a>
+      <a routerLink="/allQuestions">VIEW ALL QUESTIONS</a>
+    </div>
+
+    <div class="buttons">
+      <button routerLink="/askquestion">ASK A QUESTION</button>
+      <button routerLink="/profile">PROFILE</button>
+      <!-- <button *ngIf="(isLoggedIn$ | async)" routerLink="" (click)="logout()">LOG OUT</button> -->
+      <button routerLink="">LOG OUT</button>
+    </div>
+
   </div>
   <div class="content">
     <div class="question" *ngFor="let question of allQuestions">
       <div class="votes">
         <img class="votesIcons" src="../../../../assets/icons/thumb-up.png" title="Upvote this Question">
-        <p>50</p>
+        <p>0</p>
         <img class="votesIcons" src="../../../../assets/icons/thumb-down.png" title="Downvote this Question">
       </div>
       <div class="questionContent">
@@ -18,11 +36,11 @@
         </div>
         <div class="viewQuestion">
           <details>
-            <summary class="summary" (click)="viewAnswers()"><b>10 answers</b></summary>
-            <p>This is the first answer here.</p>
-            <p>This is the second answer here.</p>
-            <p>This is the third answer here.</p>
-            <p>This is the fourth answer here.</p>
+            <summary class="summary"><b>0 answers</b></summary>
+            <!-- <p>This is the first answer here.</p> -->
+            <!-- <p>This is the second answer here.</p> -->
+            <!-- <p>This is the third answer here.</p> -->
+            <!-- <p>This is the fourth answer here.</p> -->
           </details>
           <button routerLink="/viewquestion" (click)="viewQuestion()">VIEW QUESTION</button>
           <div class="tag">{{ question?.tagName}}</div>

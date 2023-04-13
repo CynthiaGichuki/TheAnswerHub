@@ -22,6 +22,16 @@ export const getQuestion = createAction(
   props<{ questionID: string }>()
 );
 
+export const getQuestionSuccess = createAction(
+  '[Question] Get Question Success',
+  props<{ questionID: string }>()
+);
+
+export const getQuestionFailure = createAction(
+  '[Question] Get Question Failure',
+  props<{ error: string }>()
+);
+
 export const getQuestionVoteCount = createAction(
   '[Question] Get Question Vote Count',
   props<{ questionID: string }>()

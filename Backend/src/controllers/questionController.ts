@@ -43,6 +43,7 @@ export const addQuestion = async (req: ExtendedRequest, res: Response) => {
         if (error) return res.status(400).send(error.details[0].message)
 
         if (db.checkConnection() as unknown as boolean) {
+
             const savedQuestion = await db.exec("createQuestion", { questionID: question.questionID, title: question.title, description: question.description, tagName: question.tagName, userID: question.userID, is_deleted: '0' })
 
             if (savedQuestion) {

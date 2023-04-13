@@ -1,29 +1,50 @@
-<app-header></app-header>
+<div class="navbar">
+    <div class="logo">
+        <img class="logo" src="../../../../assets/icons/qa.png">
+    </div>
+    <div class="links">
+        <a routerLink="">HOME</a>
+        <a routerLink="/aboutus">ABOUT US</a>
+        <a routerLink="/allQuestions">VIEW ALL QUESTIONS</a>
+    </div>
+
+    <div class="buttons">
+        <button routerLink="/askquestion">ASK A QUESTION</button>
+        <button routerLink="/profile">PROFILE</button>
+        <!-- <button *ngIf="(isLoggedIn$ | async)" routerLink="" (click)="logout()">LOG OUT</button> -->
+        <button routerLink="">LOG OUT</button>
+    </div>
+
+</div>
 <!-- <h3> Welcome To Your Profile Michelle</h3> -->
 <div class="mainContent">
     <div class="userProfile">
         <div class="personalDetails">
-            <img class="userImg" src="../../../../assets/images/MichelleObama.jpg">
-            <p>Michelle Obama</p>
-            <p>michelleobama@gmail.com</p>
+            <img class="userImg" src="" alt="userImg">
+            <p></p>
+            <p></p>
         </div>
 
         <div class="analytics">
             <h4>ANALYTICS</h4>
             <div class="totalQuestions">
                 <!-- <img class="analyticsIcons" src="../../../../assets/icons/question.png"> -->
-                <div class="analyticsText">10 Total Questions</div>
+                <div class="analyticsText">1 Total Questions</div>
             </div>
             <div class="totalComments">
                 <!-- <img class="analyticsIcons" src="../../../../assets/icons/question.png"> -->
-                <div class="analyticsText">20 Total Comments</div>
+                <div class="analyticsText">0 Total Comments</div>
 
             </div>
             <div class="totalAnswers">
                 <!-- <img class="analyticsIcons" src="../../../../assets/icons/question.png"> -->
-                <div class="analyticsText">20 Total Comments</div>
+                <div class="analyticsText">0 Total Answers</div>
             </div>
 
+        </div>
+
+        <div class="updateprofile">
+            <button>UPDATE PROFILE</button>
         </div>
 
     </div>
@@ -35,19 +56,20 @@
         <div class="question">
             <div class="votes">
                 <img class="votesIcons" src="../../../../assets/icons/thumb-up.png" title="Upvote this Question">
-                <p>50</p>
+                <p>0</p>
                 <img class="votesIcons" src="../../../../assets/icons/thumb-down.png" title="Downvote this Question">
             </div>
             <div class="questionContent">
                 <div class="title">
-                    <h3> How Do I undo the most recent commits in git</h3>
+                    <h3> </h3>
                 </div>
                 <div class="description">
-                    How Do I undo the most recent commits in git
+
                 </div>
                 <div class="viewQuestion">
-                    <h5>10 answers</h5>
+                    <h5>0 answers</h5>
                     <button routerLink="/question">VIEW QUESTION</button>
+                    <!-- <div class="tag">SQL</div> -->
                     <div class="iconsClass">
                         <img class="icons" src="../../../../assets/icons/edit.png" title="Edit this Question">
                         <img class="icons" src="../../../../assets/icons/delete.png" title="Delete this Question">
@@ -60,27 +82,28 @@
             <h3>Your Most Popular Question</h3>
         </div>
         <div class="question">
-            <div class="votes">
+            <p class="text"><i>Your Most Popular Question Will Appear Here</i></p>
+            <!-- <div class="votes">
                 <img class="votesIcons" src="../../../../assets/icons/thumb-up.png" title="Upvote this Question">
-                <p>50</p>
+                <p>0</p>
                 <img class="votesIcons" src="../../../../assets/icons/thumb-down.png" title="Downvote this Question">
-            </div>
-            <div class="questionContent">
+            </div> -->
+            <!-- <div class="questionContent">
                 <div class="title">
-                    <h3> How Do I undo the most recent commits in git</h3>
+                    
                 </div>
                 <div class="description">
-                    How Do I undo the most recent commits in git
+                 
                 </div>
                 <div class="viewQuestion">
-                    <h5>10 answers</h5>
+                    <h5>0 answers</h5>
                     <button routerLink="/question">VIEW QUESTION</button>
                     <div class="iconsClass">
                         <img class="icons" src="../../../../assets/icons/edit.png" title="Edit this Question">
                         <img class="icons" src="../../../../assets/icons/delete.png" title="Delete this Question">
                     </div>
                 </div>
-            </div>
+            </div> -->
         </div>
         <div class="mostRecent">
             <h3>All of Your Questions</h3>
@@ -88,18 +111,24 @@
         <div class="question">
             <div class="votes">
                 <img class="votesIcons" src="../../../../assets/icons/thumb-up.png" title="Upvote this Question">
-                <p>50</p>
+                <p>0</p>
                 <img class="votesIcons" src="../../../../assets/icons/thumb-down.png" title="Downvote this Question">
             </div>
             <div class="questionContent">
-                <div *ngFor="let question of userQuestions$ | async">
-                    <h2>{{ question.title }}</h2>
-                    <p>{{ question.description }}</p>
-                    <p>Tags: {{ question.tagName }}</p>
-                    <button (click)="onDeleteQuestion(question.questionID)">Delete</button>
-                    <button (click)="onUpdateQuestion(question)">Edit</button>
-                </div>
+                <div class="title">
 
+                </div>
+                <div class="description">
+
+                </div>
+                <div class="viewQuestion">
+                    <h5>0 answers</h5>
+                    <button routerLink="/question">VIEW QUESTION</button>
+                    <div class="iconsClass">
+                        <img class="icons" src="../../../../assets/icons/edit.png" title="Edit this Question">
+                        <img class="icons" src="../../../../assets/icons/delete.png" title="Delete this Question">
+                    </div>
+                </div>
             </div>
         </div>
 

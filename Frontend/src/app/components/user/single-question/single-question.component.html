@@ -18,18 +18,18 @@
 <div class="question">
     <div class="votes">
         <img class="votesIcons" src="../../../../assets/icons/thumb-up.png" title="Upvote this question">
-        <p>50</p>
+        <p>0</p>
         <img class="votesIcons" src="../../../../assets/icons/thumb-down.png" title="Downvote this question">
     </div>
     <div class="questionContent">
         <div class="title">
-            <h3> How Do I undo the most recent commits in git</h3>
+
         </div>
         <div class="description">
-            How Do I undo the most recent commits in git
-            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Culpa blanditiis labore, necessitatibus adipisci
-            excepturi nihil, odio delectus commodi error eos voluptatibus unde illo possimus tenetur est libero facilis
-            cum! Dolorum!
+
+        </div>
+        <div class="tag">
+
         </div>
     </div>
 </div>
@@ -38,23 +38,23 @@
     <div class="answer">
         <div class="votes">
             <img class="votesIcons" src="../../../../assets/icons/thumb-up.png" title="Upvote this Question">
-            <p>50</p>
+            <p>0</p>
             <img class="votesIcons" src="../../../../assets/icons/thumb-down.png" title="Downvote this Question">
         </div>
         <div class="answerContent">
-           
+
             <div class="description">
-                git reset is the command responsible for the undo. It will undo your last commit while leaving your
+                <!-- git reset is the command responsible for the undo. It will undo your last commit while leaving your
                 working tree (the state of your files on disk) untouched. You'll need to add them again before you can
-                commit them again.
+                commit them again. -->
             </div>
             <div class="viewComment">
                 <details>
                     <summary class="summary"><b>View Comments</b></summary>
-                    <p>This is the first comment here.</p>
-                    <p>This is the second comment here.</p>
+                    <!-- <p>This is the first comment here.</p> -->
+                    <!-- <p>This is the second comment here.</p>
                     <p>This is the third comment here.</p>
-                    <p>This is the fourth comment here.</p>
+                    <p>This is the fourth comment here.</p> -->
                 </details>
 
                 <button routerLink="/viewquestion">COMMENT</button>
@@ -62,38 +62,12 @@
         </div>
     </div>
 
-    <div class="answer">
-        <div class="votes">
-            <img class="votesIcons" src="../../../../assets/icons/thumb-up.png" title="Upvote this answer">
-            <p>50</p>
-            <img class="votesIcons" src="../../../../assets/icons/thumb-down.png" title="Downvote this answer">
-        </div>
-        <div class="answerContent">
-            <div class="description">
 
-                git reset is the command responsible for the undo. It will undo your last commit while leaving your
-                working tree (the state of your files on disk) untouched. You'll need to add them again before you can
-                commit them again.
-
-            </div>
-            <div class="viewComment">
-                <details>
-                    <summary class="summary"><b>View Comments</b></summary>
-                    <p>This is the first comment here.</p>
-                    <p>This is the second comment here.</p>
-                    <p>This is the third comment here.</p>
-                    <p>This is the fourth comment here.</p>
-                </details>
-                <button routerLink="/question">COMMENT</button>
-            </div>
-           
-        </div>
-    </div>
 
     <div class="submitAnswers">
         <h5>Submit Your Own Answer</h5>
         <textarea></textarea>
-        <button class="submitAnswerBtn">SUBMIT ANSWER</button>
+        <button class="submitAnswerBtn" routerLink="/viewquestion">SUBMIT ANSWER</button>
 
     </div>
 </div>

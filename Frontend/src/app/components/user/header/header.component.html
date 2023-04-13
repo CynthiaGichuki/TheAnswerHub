@@ -15,8 +15,8 @@
         <button *ngIf="(isLoggedIn$ | async)" routerLink="/askquestion">ASK A QUESTION</button>
         <button *ngIf="!(isLoggedIn$ | async)" routerLink="/login">SIGN IN</button>
         <button *ngIf="(isLoggedIn$ | async)" routerLink="/profile">PROFILE</button>
-        <!-- <button *ngIf="(isLoggedIn$ | async)" routerLink="" (click)="logout()">LOG OUT</button> -->
-        <button *ngIf="(isLoggedIn$ | async)" routerLink= "">LOG OUT</button>
+        <button *ngIf="(isLoggedIn$ | async)" routerLink="" (click)="logout()">LOG OUT</button>
+        <!-- <button *ngIf="(isLoggedIn$ | async)" routerLink= "">LOG OUT</button> -->
     </div>
 
 </div>

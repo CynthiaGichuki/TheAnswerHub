@@ -56,10 +56,25 @@ export const questionReducer = createReducer(
       q.questionID === question.questionID ? question : q
     )
   })),
+  on(QuestionActions.getQuestion, (state) => ({
+    ...state,
+    isLoading: true
+  })),
 
   on(QuestionActions.getQuestionVoteCount, (state) => ({
     ...state,
     isLoading: true,
+  })),
+
+  on(QuestionActions.getQuestionSuccess, (state, { questionID }) => ({
+    ...state,
+    isLoading: false,
+    questions: state.questions.filter((q) => q.questionID !== `${questionID}`)
+  })),
+  on(QuestionActions.getQuestionFailure, (state, { error }) => ({
+    ...state,
+    isLoading: false,
+    error
   })),
 
   on(QuestionActions.getQuestionVoteCountSuccess, (state, { questionID }) => ({

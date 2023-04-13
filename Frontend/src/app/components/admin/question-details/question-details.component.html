@@ -13,7 +13,7 @@
         <th>Question ID</th>
         <th>Title</th>
         <th>Description</th>
-        <th>Vote Count</th>
+        <!-- <th>Vote Count</th> -->
 
         <tr *ngFor="let question of allQuestions">
           <td>{{ question.questionID }}</td>
@@ -21,7 +21,7 @@
           <td>{{ question.description }}</td>
           <!-- <td>{{ question.voteCount}}</td> -->
           <!-- <td>{{ user.username }}</td> -->
-          <td class="td-btn"><button>DISABLE</button></td>
+          <td class="td-btn"><button (click)="deleteQuestion(question)">DELETE</button></td>
         </tr>
 
       </table>

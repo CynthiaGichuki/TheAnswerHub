@@ -59,15 +59,15 @@ export class LoginComponent implements OnInit {
     this.store.select(selectLoggedInUser).subscribe((user: any) => {
       if (user && user.is_admin) {
         this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
-          alert('Registration is Successful. Welcome Admin ' + user.fullname + '.');
+          alert('Login is Successful. Welcome Admin ' + user.fullname + '.');
           this.router.navigate(["/admin"]);
         });
       } else if (user) {
-        alert('Registration is Successful. Welcome ' + user.fullname + '.');
+        alert('Login is Successful. Welcome ' + user.fullname + '.');
         this.router.navigate(['']);
       }
     });
-    
+
 
   }
 
