@@ -20,6 +20,7 @@ export class UserDetailsComponent {
 
   users: User[] = []
   selectedUser$: Observable<User | undefined> = new Observable<User | undefined>();
+// userID: string;
 
   constructor(private store: Store) { }
 
@@ -39,6 +40,10 @@ export class UserDetailsComponent {
 
   disable(userID: string) {
     this.store.dispatch(deleteUser({ userID }));
+  }
+  deleteUser(userToDelete: User): void {
+    this.users = this.users.filter(user => user !== userToDelete);
+    alert("User has been deleted successfully")
   }
 }
 

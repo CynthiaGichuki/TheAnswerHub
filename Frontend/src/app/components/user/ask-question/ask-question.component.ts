@@ -10,6 +10,7 @@ import { QuestionService } from 'src/app/services/Question/question.service';
 import { Router } from '@angular/router';
 import { Question } from 'src/app/interfaces/interfaces';
 import { selectLoggedInUser } from 'src/app/state/Selectors/login.selector';
+import { addQuestion } from '../../../state/Actions/question.action';
 
 
 @Component({
@@ -33,7 +34,7 @@ export class AskQuestionComponent implements OnInit {
 
   ngOnInit(): void {
     const user = this.store.select(selectLoggedInUser).subscribe((user: any) => {
-      console.log(user?.user[0].userId)
+      // console.log(user?.user[0].userId)
     })
     
   }
@@ -42,7 +43,7 @@ export class AskQuestionComponent implements OnInit {
   submitData(form: FormGroup) {
     console.log(form.value);
 
-    this.store.dispatch(QuestionsActions.addQuestion({
+    this.store.dispatch(addQuestion({
       ...form.value
     }));
 

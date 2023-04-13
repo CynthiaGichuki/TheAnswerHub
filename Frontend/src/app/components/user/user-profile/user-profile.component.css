@@ -1,49 +1,62 @@
-*{
+* {
     margin: 0px;
     padding: 0px;
 }
-h3{
+
+h3 {
     text-align: center;
     margin-top: 20px;
     /* background-color: rgba(221, 221, 221, 255); */
 }
-.mainContent{
+
+.mainContent {
     display: flex;
     margin-top: 30px;
 }
-.userDetails{
+
+.userDetails {
     display: flex;
     flex-direction: column;
 }
-.personalDetails{
+
+.personalDetails {
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 20px;
 }
-.userImg{
+
+.userImg {
     width: 300px;
 }
-p{
+
+p {
     color: rgba(110, 110, 238, 255);
 }
-.analytics{
+
+.analytics {
     margin-top: 40px;
     text-align: center;
 }
-.analyticsText:hover{
-    color:rgba(110, 110, 238, 255) ;
+
+.analyticsText:hover {
+    color: rgba(110, 110, 238, 255);
 }
-.totalQuestions, .totalAnswers, .totalComments{
+
+.totalQuestions,
+.totalAnswers,
+.totalComments {
     display: flex;
     gap: 10px;
     margin-top: 20px;
     justify-content: center;
     align-items: center;
 }
+
 .analyticsIcons {
     width: 70px;
 }
+
 .allQuestionsDiv {
     background-color: rgba(221, 221, 221, 255);
     display: flex;
@@ -61,6 +74,28 @@ p{
 
 }
 
+.logo {
+    width: 50px;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-around;
+}
+
+.links {
+    display: flex;
+    justify-content: space-around;
+    width: 450px;
+    /* background-color: red; */
+}
+
+.buttons {
+    display: flex;
+    justify-content: space-around;
+    gap: 20px;
+}
+
 .question {
     background-color: white;
     border-radius: 1rem;
@@ -68,7 +103,18 @@ p{
     width: 80%;
     display: flex;
     align-items: center;
-    gap: 20px;
+    gap: 10px;
+}
+
+.updateprofile {
+    margin-top: 100px;
+    display: flex;
+    justify-content: center;
+    /* margin-left: 100px; */
+}
+
+.text {
+    margin-left: 220px;
 }
 
 .votes {
@@ -81,7 +127,8 @@ p{
 .votesIcons {
     width: 50px;
 }
-.votesIcons:hover{
+
+.votesIcons:hover {
     opacity: 50%;
 }
 
@@ -99,10 +146,12 @@ p{
     align-items: center;
     gap: 10rem;
 }
-h5:hover{
+
+h5:hover {
     color: rgba(110, 110, 238, 255);
 
 }
+
 button {
     color: white;
     background-color: rgba(110, 110, 238, 255);
@@ -116,7 +165,8 @@ button:hover {
     background-color: black;
 
 }
-.iconsClass{
+
+.iconsClass {
     display: flex;
     gap: 20px;
 }
@@ -124,9 +174,11 @@ button:hover {
 .answer {
     display: flex;
 }
-.icons{
+
+.icons {
     width: 40px;
 }
-.icons:hover{
+
+.icons:hover {
     opacity: 50%;
 }

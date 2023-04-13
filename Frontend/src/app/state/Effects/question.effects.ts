@@ -29,8 +29,8 @@ export class QuestionEffects {
       ofType(QuestionActions.addQuestion),
       mergeMap(({ question }) =>
         this.questionService.addQuestion(question).pipe(
-          map((addQuestionSuccess) =>
-            QuestionActions.addQuestionSuccess({ question: addQuestionSuccess })
+          map((addedQuestion) =>
+            QuestionActions.addQuestionSuccess({ question: addedQuestion })
           ),
           catchError((error) =>
             of(QuestionActions.addQuestionFailure({ error: error.message }))
@@ -56,6 +56,22 @@ export class QuestionEffects {
     )
   );
 
+  getQuestion$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(QuestionActions.getQuestion),
+      mergeMap(({ questionID }) =>
+        this.questionService.getQuestionById(`${questionID}`).pipe(
+          map(() =>
+            QuestionActions.getQuestionSuccess({ questionID })
+          ),
+          catchError((error) =>
+            of(QuestionActions.getQuestionFailure({ error: error.message }))
+          )
+        )
+      )
+    )
+  );
+
   deleteQuestion$ = createEffect(() =>
     this.actions$.pipe(
       ofType(QuestionActions.deleteQuestion),
@@ -73,20 +89,20 @@ export class QuestionEffects {
   );
 
   getQuestionVoteCount$ = createEffect(() =>
-  this.actions$.pipe(
-    ofType(QuestionActions.getQuestionVoteCount),
-    mergeMap(({ questionID }) =>
-      this.questionService.getQuestionVoteCount(`${questionID}`).pipe(
-        map(() =>
-          QuestionActions.getQuestionVoteCount({ questionID })
-        ),
-        catchError((error) =>
-          of(QuestionActions.getQuestionVoteCountFailure({ error: error.message }))
+    this.actions$.pipe(
+      ofType(QuestionActions.getQuestionVoteCount),
+      mergeMap(({ questionID }) =>
+        this.questionService.getQuestionVoteCount(`${questionID}`).pipe(
+          map(() =>
+            QuestionActions.getQuestionVoteCount({ questionID })
+          ),
+          catchError((error) =>
+            of(QuestionActions.getQuestionVoteCountFailure({ error: error.message }))
+          )
         )
       )
     )
-  )
-);
+  );
 
 
 

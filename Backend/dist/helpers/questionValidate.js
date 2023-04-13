@@ -9,6 +9,7 @@ const joi_1 = __importDefault(require("joi"));
 const questionSchema = joi_1.default.object({
     questionID: joi_1.default.string().min(3).max(255).required(),
     title: joi_1.default.string().min(3).max(255).required(),
+    description: joi_1.default.string().min(3).max(255).required(),
     tagName: joi_1.default.string().min(3).max(255).required(),
     userID: joi_1.default.string().min(3).max(255).required(),
     is_deleted: joi_1.default.string().required(),

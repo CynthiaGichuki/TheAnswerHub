@@ -7,6 +7,7 @@ import questionModel from "../Models/questionModel";
 const questionSchema = joi.object({
     questionID: joi.string().min(3).max(255).required(),
     title: joi.string().min(3).max(255).required(),
+    description: joi.string().min(3).max(255).required(),
     tagName: joi.string().min(3).max(255).required(),
     userID: joi.string().min(3).max(255).required(),
     is_deleted: joi.string().required(),

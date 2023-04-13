@@ -74,6 +74,12 @@ input {
   opacity: 50%;
 }
 
+.tag{
+  background-color: rgba(110, 110, 238, 255);
+  padding: 5px;
+  width: 50px;
+  text-align: center;
+} 
 h4 {
   text-align: center;
   background-color: rgba(221, 221, 221, 255);

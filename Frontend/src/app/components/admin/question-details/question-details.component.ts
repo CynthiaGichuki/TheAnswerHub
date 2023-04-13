@@ -33,6 +33,10 @@ export class QuestionDetailsComponent {
       // this.store.dispatch(getQuestionVoteCount());
     
   }
+  deleteQuestion(questionToDelete: Question): void {
+    this.allQuestions = this.allQuestions.filter(question => question !== questionToDelete);
+    alert("Question has been deleted successfully")
+  }
 
 
 }

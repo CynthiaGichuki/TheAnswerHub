@@ -48,13 +48,15 @@ export class RegisterComponent implements OnInit {
 
     this.store.select(selectLoggedInUser).subscribe((user: any) => {
       if (user) {
-          this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
-            this.router.navigate(["/"]);
-          }
-          );
-    }
+        this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+          this.router.navigate(["/login"]);
+          alert("Registration Successful")
+        }
+        );
+      }
+      // this.form.reset()
 
-  })
+    })
 
     this.store.select(selectRegisterUserStateError).subscribe((error) => {
       if (error) {

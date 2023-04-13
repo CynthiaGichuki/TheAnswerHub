@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, Output, OnInit } from '@angular/core';
-import { RouterModule } from '@angular/router';
-import { Question } from 'src/app/interfaces/interfaces';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
+import { Answer, Question } from 'src/app/interfaces/interfaces';
 import { Observable } from 'rxjs';
 import { select, Store } from '@ngrx/store';
 import { AppState } from '../../../state/app.state';
@@ -22,9 +22,13 @@ export class QuestionListComponent implements OnInit {
 
   allQuestions: Question[] = []
 
+  question: Question | undefined
+
+  answers: Answer[] = []
+
   // question$ = this.store.pipe(select(selectQuestionById('123')));
 
-  constructor(private store: Store) {
+  constructor(private store: Store, private route: ActivatedRoute, private router: Router) {
 
   }
 
@@ -37,12 +41,34 @@ export class QuestionListComponent implements OnInit {
 
     })
 
+
   }
 
   viewQuestion() {
-    // this.store.dispatch(getQuestion(questionID))
+
+    // this.route.params.subscribe(params => {
+    //   const questionId = params['questionID'];
+    //   this.store.select(selectQuestionById(questionId)).subscribe(question => {
+    //     if (question) {
+    //       this.question = question;
+    //       this.router.navigate(['/viewquestion'])
+    //     }
+    //   });
+    // });
+    this.route.params.subscribe(params => {
+      this.store.select(selectQuestionById(params['questionId'])).subscribe(question => {
+        this.question = question;
+        console.log("question", this.question);
+        this.router.navigate(['/viewquestion'])
+      },
+        (error: any) => {
+          console.log(error);
+        }
+      );
+      console.log('console works')
+    });
   }
-  viewAnswers(){
+  viewAnswers() {
     this.store.dispatch(loadAnswers())
   }
 
